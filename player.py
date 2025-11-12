@@ -12,7 +12,7 @@ class Player():
         move(self, direction) : Get the next room from the exits dictionary of the current room, set it as the current room and return True. If the next room is None, print an error message and return False.
 
     Examples:
-    >>> import Room
+    >>> from room import Room
     >>> sam = Player("Sam")
     >>> sam.name
     "Sam"
