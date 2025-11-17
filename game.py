@@ -15,6 +15,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        self.exits = {}
     
     # Setup the game
     def setup(self):
@@ -86,6 +87,9 @@ class Game:
         forest.exits = {"N" : None, "E" : None, "S" : villagenorth, "O" : cave, "U" : None, "D" : None}
         stable.exits = {"N" : None, "E" : villagesouth, "S" : castle, "O" : None, "U" : None, "D" : None}
         bridge.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+
+        # Create set of directions
+        self.exits = {d for d in tower.exits.keys()}
 
         # Setup player and starting room
 

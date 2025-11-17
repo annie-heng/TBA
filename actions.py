@@ -55,9 +55,14 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
-        # Move the player in the direction specified by the parameter.
-        player.move(direction)
-        return True
+        if direction in game.exits:
+            # Move the player in the direction specified by the parameter.
+            player.move(direction)
+            return True
+        else:
+            print(f"\nDirection '{direction}' non reconnue.")
+            print(game.player.current_room.get_long_description())
+            return False
 
     def quit(game, list_of_words, number_of_parameters):
         """
