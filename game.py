@@ -29,9 +29,9 @@ class Game:
         self.commands["go"] = go
         
         # Setup rooms
-        villagenorth = Room("Village", "la partie nord du village.")
+        villagenorth = Room("VillageNorth", "la partie nord du village.")
         self.rooms.append(villagenorth)
-        villagesouth = Room("Village", "la partie sud du village.")
+        villagesouth = Room("VillageSouth", "la partie sud du village.")
         self.rooms.append(villagesouth)
         castle = Room("Castle", "un château aux murs sombres.")
         self.rooms.append(castle)
@@ -75,7 +75,7 @@ class Game:
         #castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
 
         villagesouth.exits = {"N" : villagenorth, "E" : None, "S" : lake, "O" : stable, "U" : None, "D" : None}
-        villagenorth.exits = {"N" : villagenorth, "E" : None, "S" : lake, "O" : stable, "U" : None, "D" : None}
+        villagenorth.exits = {"N" : forest, "E" : tower, "S" : village, "O" : None, "U" : None, "D" : None}
 
         # Setup player and starting room
 
