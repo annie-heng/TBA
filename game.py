@@ -75,7 +75,17 @@ class Game:
         #castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
 
         villagesouth.exits = {"N" : villagenorth, "E" : None, "S" : lake, "O" : stable, "U" : None, "D" : None}
-        villagenorth.exits = {"N" : forest, "E" : tower, "S" : village, "O" : None, "U" : None, "D" : None}
+        villagenorth.exits = {"N" : forest, "E" : tower, "S" : villagesouth, "O" : None, "U" : None, "D" : None}
+        castle.exits = {"N" : stable, "E" : lake, "S" : None, "O" : stable, "U" : None, "D" : undercastle}
+        undercastle.exits = {"N" : towercave, "E" : None, "S" : None, "O" : None, "U" : castle, "D" : None}
+        tower.exits = {"N" : None, "E" : None, "S" : None, "O" : villagenorth, "U" : toptower, "D" : towercave}
+        toptower.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : tower}
+        towercave.exits = {"N" : None, "E" : None, "S" : undercastle, "O" : None, "U" : tower, "D" : None}
+        cave.exits = {"N" : None, "E" : forest, "S" : None, "O" : None, "U" : None, "D" : None}
+        lake.exits = {"N" : villagesouth, "E" : bridge, "S" : None, "O" : castle, "U" : None, "D" : None}
+        forest.exits = {"N" : None, "E" : None, "S" : villagenorth, "O" : cave, "U" : None, "D" : None}
+        stable.exits = {"N" : None, "E" : villagesouth, "S" : castle, "O" : None, "U" : None, "D" : None}
+        bridge.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
 
         # Setup player and starting room
 
