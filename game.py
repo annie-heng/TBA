@@ -29,33 +29,58 @@ class Game:
         self.commands["go"] = go
         
         # Setup rooms
-
+        villagenorth = Room("Village", "la partie nord du village.")
+        self.rooms.append(villagenorth)
+        villagesouth = Room("Village", "la partie sud du village.")
+        self.rooms.append(villagesouth)
+        castle = Room("Castle", "un château aux murs sombres.")
+        self.rooms.append(castle)
+        undercastle = Room("UnderCastle", "un sous-terrain faiblement éclairé par des torches.")
+        self.rooms.append(undercastle)
+        tower = Room("Tower", "le hall d'une tour. Vous apercevez devant vous des escaliers menant au sommet, et d'autres cachés dans un recoin.")
+        self.rooms.append(tower)
+        toptower = Room("TopTower", "une pièce minuscule au sommet de la tour.")
+        self.rooms.append(toptower)
+        towercave = Room("BottomTower", "une cave encombrée d'objets poussiérieux.")
+        self.rooms.append(towercave)
+        cave = Room("Cave", "une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci.")
+        self.rooms.append(cave)
+        lake = Room("Lake", "une barque sur un lac.")
+        self.rooms.append(lake)
         forest = Room("Forest", "une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
         self.rooms.append(forest)
-        tower = Room("Tower", "une immense tour en pierre qui s'élève au dessus des nuages.")
-        self.rooms.append(tower)
-        cave = Room("Cave", "une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
-        self.rooms.append(cave)
-        cottage = Room("Cottage", "un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
-        self.rooms.append(cottage)
-        swamp = Room("Swamp", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
-        self.rooms.append(swamp)
-        castle = Room("Castle", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
-        self.rooms.append(castle)
+        stable = Room("Stable", "des écuries bien entretenues, où quelques chevaux se reposent.")
+        self.rooms.append(stable)
+        bridge = Room("Bridge", "sur un pont à l'aspect fragile")
+        self.rooms.append(bridge)
+
+        #tower = Room("Tower", "une immense tour en pierre qui s'élève au dessus des nuages.")
+        #self.rooms.append(tower)
+        #cave = Room("Cave", "une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
+        #self.rooms.append(cave)
+        #cottage = Room("Cottage", "un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
+        #self.rooms.append(cottage)
+        #swamp = Room("Swamp", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
+        #self.rooms.append(swamp)
+        #castle = Room("Castle", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
+        #self.rooms.append(castle)
 
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "E" : None, "S" : castle, "O" : None}
-        tower.exits = {"N" : cottage, "E" : None, "S" : None, "O" : None}
-        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+        #forest.exits = {"N" : cave, "E" : None, "S" : castle, "O" : None}
+        #tower.exits = {"N" : cottage, "E" : None, "S" : None, "O" : None}
+        #cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
+        #cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
+        #swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
+        #castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+
+        villagesouth.exits = {"N" : villagenorth, "E" : None, "S" : lake, "O" : stable, "U" : None, "D" : None}
+        villagenorth.exits = {"N" : villagenorth, "E" : None, "S" : lake, "O" : stable, "U" : None, "D" : None}
 
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = swamp
+        self.player.current_room = villagesouth
 
     # Play the game
     def play(self):
