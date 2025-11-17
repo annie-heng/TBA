@@ -16,6 +16,7 @@ class Game:
         self.commands = {}
         self.player = None
         self.exits = {}
+        self.directions = {}
     
     # Setup the game
     def setup(self):
@@ -90,6 +91,9 @@ class Game:
 
         # Create set of directions
         self.exits = {d for d in tower.exits.keys()}
+
+        # Create dict object with compatible words for directions
+        self.directions = {'N' : ['N', 'North', 'NORTH', 'north', 'n'], 'S' : ['S', 'South', 'SOUTH', 'south', 's'], 'E' : ['E', 'East', 'EAST', 'east', 'e'], 'O' : ['O', 'Ouest', 'OUEST', 'ouest', 'o'], 'U' : ['U', 'Up', 'UP', 'up', 'u'], 'D' : ['D', 'Down', 'DOWN', 'down', 'd']} 
 
         # Setup player and starting room
 
