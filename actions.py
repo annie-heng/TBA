@@ -182,7 +182,7 @@ class Actions:
 
     def back(game, list_of_words, number_of_parameters):
         """
-        Move the player in the room that has been previously visited. 
+        Move the player in the last room that has been visited. 
 
             Args:
             game (Game): The game object.
@@ -197,11 +197,11 @@ class Actions:
         >>> from game import Game
         >>> game = Game()
         >>> game.setup()
-        >>> back(game, ["history"], 0)
+        >>> back(game, ["back"], 0)
         True
-        >>> back(game, ["history", "N"], 0)
+        >>> back(game, ["back", "N"], 0)
         False
-        >>> back(game, ["history", "N", "E"], 0)
+        >>> back(game, ["back", "N", "E"], 0)
         False
         """
         player = game.player

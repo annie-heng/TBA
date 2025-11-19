@@ -67,7 +67,7 @@ class Player():
     #Define the move_back method
     def move_back(self) :
 
-        #If the player has no history, print an error message ans return False.
+        #If the player has no history, print an error message and return False.
         if len(self.history) == 0 :
             print("\nImpossible de retourner en arrière ! Votre historique est vide.\n")
             return False
