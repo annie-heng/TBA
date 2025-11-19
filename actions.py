@@ -143,3 +143,39 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+
+    def history(game, list_of_words, number_of_parameters):
+        """
+        Print the history of the player
+
+            Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+            Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+            Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> history(game, ["history"], 0)
+        True
+        >>> history(game, ["history", "N"], 0)
+        False
+        >>> history(game, ["history", "N", "E"], 0)
+        False
+        """
+        player = game.player
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        # Print the history of the player
+        print(player.get_history())
+        return True
