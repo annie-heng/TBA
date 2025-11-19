@@ -11,7 +11,7 @@ class Item:
 
     Methods : 
         __init__(self, name, description) : The constructor.
-        __str__(self) : print description
+        __str__(self) : Return a string containing a description.
 
     Examples :
 
@@ -33,4 +33,4 @@ class Item:
 
     # Redefine the methode str().
     def __str__(self):
-        print(f"{self.name} : {self.description} ({self.weight} kg)")
+        return f"{self.name} : {self.description} ({self.weight} kg)"

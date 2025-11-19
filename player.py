@@ -6,10 +6,15 @@ class Player():
     Attributes:
         name (str): The name of the player.
         current_room (Room) : The room where the player is currently located.
+        history (list) : The list containing all the rooms that the player has visited, excluding the current one.
+        inventory(dict) : The inventory of the player, in the form of a dict object where each key is the item's name and the value is the corresponding Item object.
 
     Methods:
         __init__(self, name) : The constructor.
         move(self, direction) : Get the next room from the exits dictionary of the current room, set it as the current room and return True. If the next room is None, print an error message and return False.
+        get_history(self) : Return a string that contains a list of all the rooms that the player has visited, in order. If the history attribute is empty, return the corresponding message.
+        move_back(self) : Get the last object of the history attribute, removes it from self.history and set it as the current room.
+        get_inventory(self) : Return a string of the contents of the player's inventory.
 
     Examples:
     >>> from room import Room
@@ -22,6 +27,7 @@ class Player():
     >>> kitchen.exits['N'] = bathroom
     >>> bathoom.exits['S'] = kitchen
     >>> sam.move('N')
+    True
     >>> sam.current_room.name
     "Bathroom"
 
@@ -32,6 +38,7 @@ class Player():
         self.name = name
         self.current_room = None
         self.history = []
+        self.inventory = {}
     
     # Define the move method.
     def move(self, direction):
@@ -77,3 +84,17 @@ class Player():
         print(self.current_room.get_long_description())
         #print(self.get_history())
         return True
+
+    #Define the get_inventory method.
+    def get_inventory(self) :
+
+        #If the inventory is empty, return a string indicating that no Item is present in the inventory.
+        if len(self.inventory) == 0 :
+            return "\nVotre inventaire est vide.\n"
+
+        inventory_string = "\nVous disposez des items suivants : \n"
+        
+        for item in self.inventory.values() :
+            #For each Item in the inventory, list it's name, description and weight.
+            inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)"
+        return inventory_string

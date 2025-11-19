@@ -8,12 +8,14 @@ class Room:
         name (str) : The name of the room.
         description (str) : A detailed description of the room.
         exits (dict) : a dict object. The keys are the directions, and the value associated with a key is the corresponding room.
+        inventory(dict) : The inventory of the player, in the form of a dict object where each key is the item's name and the value is the corresponding Item object.
 
     Methods : 
         __init__(self, name, description) : The constructor.
         get_exit(self, direction) : If the requested direction is available, return the corresponding room. If not, returns None.
         get_exit_string(self) : The string listing all of the available exits/directions. 
         get_long_description(self) : The detailed description of the room, followed by the exits list. 
+        get_inventory(self) : Return a string of the contents of the player's inventory.
 
     Examples :
 
@@ -42,6 +44,7 @@ class Room:
         self.name = name
         self.description = description
         self.exits = {}
+        self.inventory = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -64,3 +67,17 @@ class Room:
     # Return a long description of this room including exits.
     def get_long_description(self):
         return f"\nVous êtes dans {self.description}\n\n{self.get_exit_string()}\n"
+
+    #Define the get_inventory method.
+    def get_inventory(self) :
+
+        #If the inventory is empty, return a string indicating that no Item is present in the Room.
+        if len(self.inventory) == 0 :
+            return "\nIl n'y a rien ici.\n"
+
+        inventory_string = "\nLa pièce contient : \n"
+        
+        for item in self.inventory.values() :
+            #For each Item in the Room, list it's name, description and weight.
+            inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)"
+        return inventory_string
