@@ -45,9 +45,21 @@ class Player():
             return False
         
         # Set the current room to the next room.
-        history.append(self.current_room)
+        self.history.append(self.current_room)
         self.current_room = next_room
         print(self.current_room.get_long_description())
+        print(self.get_history())
         return True
-
     
+    #Define the get_history method.
+    def get_history(self) :
+
+        #If the player has not moved, return a string indicating that no moves have been made yet.
+        if len(self.history) == 0 :
+            return "Vous n'avez pas encore d'historique, déplacez-vous !\n"
+
+        history_string = "Votre parcours est le suivant : \n"
+        #Add the Room description to history_string for each Room in self.history.
+        for place in self.history :
+            history_string += f"\t- {place.description}\n"
+        return history_string

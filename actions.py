@@ -55,6 +55,7 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
+        #Check if the provided direction is part of the valid words list of one possible direction
         for d in game.directions.keys() :
             if direction in game.directions.get(d) :
                 game.player.move(d)
