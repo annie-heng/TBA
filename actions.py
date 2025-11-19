@@ -58,11 +58,11 @@ class Actions:
         #Check if the provided direction is part of the valid words list of one possible direction
         for d in game.directions.keys() :
             if direction in game.directions.get(d) :
-                game.player.move(d)
+                player.move(d)
                 return True
         else:
             print(f"\nDirection '{direction}' non reconnue.")
-            print(game.player.current_room.get_long_description())
+            print(player.current_room.get_long_description())
             return False
 
     def quit(game, list_of_words, number_of_parameters):
@@ -178,4 +178,40 @@ class Actions:
 
         # Print the history of the player
         print(player.get_history())
+        return True
+
+    def back(game, list_of_words, number_of_parameters):
+        """
+        Move the player in the room that has been previously visited. 
+
+            Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+            Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+            Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> back(game, ["history"], 0)
+        True
+        >>> back(game, ["history", "N"], 0)
+        False
+        >>> back(game, ["history", "N", "E"], 0)
+        False
+        """
+        player = game.player
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        # Move the player to the previous room.
+        player.move_back()
         return True

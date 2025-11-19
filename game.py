@@ -29,8 +29,10 @@ class Game:
         self.commands["quit"] = quit
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
         self.commands["go"] = go
-        history = Command("history", " : affiche le parcours du joueur", Actions.history, 0)
+        history = Command("history", " : afficher le parcours du joueur", Actions.history, 0)
         self.commands["history"] = history
+        back = Command("back", " : revenir en arrière", Actions.back, 0)
+        self.commands["back"] = back
         
         # Setup rooms
         villagenorth = Room("VillageNorth", "la partie nord du village.")
