@@ -300,6 +300,7 @@ class Actions:
         else :
             player.inventory[item_name] = item
             del player.current_room.inventory[item_name]
+            print(f"\nVous avez pris l'objet '{item_name}'.\n")
             return True
 
     def drop(game, list_of_words, number_of_parameters):
@@ -350,6 +351,7 @@ class Actions:
         else :
             del player.inventory[item_name]
             player.current_room.inventory[item_name] = item
+            print(f"\nVous avez déposé l'objet '{item_name}'.\n")
             return True
 
 
