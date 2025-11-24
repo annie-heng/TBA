@@ -38,8 +38,10 @@ class Game:
         self.commands["look"] = look
         take = Command("take", " : prendre un Item présent dans la pièce où se situe le joueur", Actions.take, 1)
         self.commands["take"] = take
-        drop = Command("take", " : déposer un Item de l'inventaire dans la pièce actuelle", Actions.drop, 1)
+        drop = Command("drop", " : déposer un Item de l'inventaire dans la pièce actuelle", Actions.drop, 1)
         self.commands["drop"] = drop
+        check = Command("check", " : afficher la liste des items présents dans l'inventaire du joueur", Actions.check, 0)
+        self.commands["check"] = check
 
         # Setup rooms
         villagenorth = Room("VillageNorth", "dans la partie nord du village.")

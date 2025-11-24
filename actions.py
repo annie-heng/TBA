@@ -351,3 +351,40 @@ class Actions:
             del player.inventory[item_name]
             player.current_room.inventory[item_name] = item
             return True
+
+
+    def check(game, list_of_words, number_of_parameters):
+        """
+        Print the list of items in the player's inventory. 
+
+            Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+            Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+            Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> check(game, ["check"], 0)
+        True
+        >>> check(game, ["check", "N"], 0)
+        False
+        >>> check(game, ["check", "N", "E"], 0)
+        False
+        """
+        player = game.player
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        # Print the description and the list of items in the current room.
+        print(player.get_inventory())
+        return True
