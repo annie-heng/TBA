@@ -1,7 +1,8 @@
 # Define the Player class.
+
 class Player():
     """
-    This class represents a player. A player is composed of a name, and a current location.
+    This class represents a player. A player is composed of a name, a history, an inventory and a current location.
 
     Attributes:
         name (str): The name of the player.
@@ -13,8 +14,8 @@ class Player():
         __init__(self, name) : The constructor.
         move(self, direction) : Get the next room from the exits dictionary of the current room, set it as the current room and return True. If the next room is None, print an error message and return False.
         get_history(self) : Return a string that contains a list of all the rooms that the player has visited, in order. If the history attribute is empty, return the corresponding message.
-        move_back(self) : Get the last object of the history attribute, removes it from self.history and set it as the current room.
-        get_inventory(self) : Return a string of the contents of the player's inventory.
+        move_back(self) : If the history is not empty, get the last object of the history attribute, removes it from self.history, set it as the current room and return True.
+        get_inventory(self) : Return a string listing the contents of the player's inventory.
 
     Examples:
     >>> from room import Room
@@ -79,7 +80,7 @@ class Player():
             print("\nImpossible de retourner en arrière ! Votre historique est vide.\n")
             return False
 
-        #Set the current room to the previous room.
+        #Set the current room to the last visited room.
         self.current_room = self.history.pop()
         print(self.current_room.get_long_description())
         #print(self.get_history())
@@ -95,6 +96,6 @@ class Player():
         inventory_string = "\nVous disposez des items suivants : \n"
         
         for item in self.inventory.values() :
-            #For each Item in the inventory, list it's name, description and weight.
-            inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)"
+            #For each Item in the inventory, list its name, description and weight.
+            inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)\n"
         return inventory_string

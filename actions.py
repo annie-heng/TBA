@@ -146,7 +146,7 @@ class Actions:
 
     def history(game, list_of_words, number_of_parameters):
         """
-        Print the history of the player
+        Print the history of the player.
 
             Args:
             game (Game): The game object.
@@ -176,7 +176,7 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
-        # Print the history of the player
+        # Print the history of the player.
         print(player.get_history())
         return True
 

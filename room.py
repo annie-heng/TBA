@@ -2,29 +2,29 @@
 
 class Room:
     """
-    This class represents a room. A room is composed of a name, a description, and at least one exit.
+    This class represents a room. A room is composed of a name, a description, an inventory and at least one exit.
 
     Attributes :
         name (str) : The name of the room.
         description (str) : A detailed description of the room.
         exits (dict) : a dict object. The keys are the directions, and the value associated with a key is the corresponding room.
-        inventory(dict) : The inventory of the player, in the form of a dict object where each key is the item's name and the value is the corresponding Item object.
+        inventory(dict) : a dict object that lists all the Items that are present in the room. Keys are the names of the Items, and the values are the corresponding Item objects.
 
     Methods : 
         __init__(self, name, description) : The constructor.
         get_exit(self, direction) : If the requested direction is available, return the corresponding room. If not, returns None.
         get_exit_string(self) : The string listing all of the available exits/directions. 
         get_long_description(self) : The detailed description of the room, followed by the exits list. 
-        get_inventory(self) : Return a string of the contents of the player's inventory.
+        get_inventory(self) : Return a string listing the contents of the player's inventory.
 
     Examples :
 
-    >>> kitchen = Room("Kitchen", "dans une cuisine moderne et bien illuminée.")
-    >>> livingroom = Room("LivingRoom", "dans un salon où se trouve une table basse et un grand canapé en face d'un téléviseur.")
+    >>> kitchen = Room("Kitchen", "une cuisine moderne et bien illuminée.")
+    >>> livingroom = Room("LivingRoom", "un salon où se trouve une table basse et un grand canapé en face d'un téléviseur.")
     >>> kitchen.exits['N'] = livingroom
     >>> livingroom.exits['S'] = kitchen
     >>> kitchen.name
-    'cuisine'
+    'Kitchen'
     >>> kitchen.description
     'dans une cuisine moderne, bien illuminée et adjacente au salon.'
     >>> livingroom.exits
@@ -79,5 +79,5 @@ class Room:
         
         for item in self.inventory.values() :
             #For each Item in the Room, list it's name, description and weight.
-            inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)"
+            inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)\n"
         return inventory_string
