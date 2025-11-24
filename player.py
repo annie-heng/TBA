@@ -40,6 +40,8 @@ class Player():
         self.current_room = None
         self.history = []
         self.inventory = {}
+        self.max_weight = 4
+        self.current_weight = 0
     
     # Define the move method.
     def move(self, direction):
@@ -98,4 +100,5 @@ class Player():
         for item in self.inventory.values() :
             #For each Item in the inventory, list its name, description and weight.
             inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)\n"
-        return inventory_string
+        inventory_string += f"\nVotre sac pèse {self.current_weight} kg\n"
+        return inventory_string 

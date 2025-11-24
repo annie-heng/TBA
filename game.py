@@ -132,6 +132,7 @@ class Game:
 
         #Setup item player
         self.player.inventory["money"] = money
+        player.current_weight += money.weight
 
     # Play the game
     def play(self):

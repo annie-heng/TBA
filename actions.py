@@ -297,8 +297,12 @@ class Actions:
         if item is None :
             print(f"\nAucun objet nommé {item_name} ne se trouve dans la pièce. Tapez look pour avoir la liste des objets disponibles dans cette pièce.\n")
             return False
+        elif player.current_weight + item.weight > player.max_weight:
+            print(f"\nL'objet '{item_name}' ne rentre pas dans votre sac. Il n'y a plus de place.\n")
+            return False
         else :
             player.inventory[item_name] = item
+            player.current_weight += item.weight
             del player.current_room.inventory[item_name]
             print(f"\nVous avez pris l'objet '{item_name}'.\n")
             return True
@@ -350,6 +354,7 @@ class Actions:
             return False
         else :
             del player.inventory[item_name]
+            player.current_weight -= item.weight
             player.current_room.inventory[item_name] = item
             print(f"\nVous avez déposé l'objet '{item_name}'.\n")
             return True
