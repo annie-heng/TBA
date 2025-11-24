@@ -87,18 +87,20 @@ class Game:
         #swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
         #castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
 
-        villagesouth.exits = {"N" : villagenorth, "E" : None, "S" : lake, "O" : stable, "U" : None, "D" : None}
-        villagenorth.exits = {"N" : forest, "E" : tower, "S" : villagesouth, "O" : None, "U" : None, "D" : None}
+        villagesouth.exits = {"N" : villagenorth, "E" : field, "S" : lake, "O" : stable, "U" : None, "D" : None}
+        villagenorth.exits = {"N" : forest, "E" : tower, "S" : villagesouth, "O" : shop, "U" : None, "D" : None}
         castle.exits = {"N" : stable, "E" : lake, "S" : None, "O" : stable, "U" : None, "D" : undercastle}
         undercastle.exits = {"N" : towercave, "E" : None, "S" : None, "O" : None, "U" : castle, "D" : None}
-        tower.exits = {"N" : None, "E" : None, "S" : None, "O" : villagenorth, "U" : toptower, "D" : towercave}
+        tower.exits = {"N" : None, "E" : None, "S" : field, "O" : villagenorth, "U" : toptower, "D" : towercave}
         toptower.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : tower}
         towercave.exits = {"N" : None, "E" : None, "S" : undercastle, "O" : None, "U" : tower, "D" : None}
         cave.exits = {"N" : None, "E" : forest, "S" : None, "O" : None, "U" : None, "D" : None}
         lake.exits = {"N" : villagesouth, "E" : bridge, "S" : None, "O" : castle, "U" : None, "D" : None}
         forest.exits = {"N" : None, "E" : None, "S" : villagenorth, "O" : cave, "U" : None, "D" : None}
-        stable.exits = {"N" : None, "E" : villagesouth, "S" : castle, "O" : None, "U" : None, "D" : None}
-        bridge.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        stable.exits = {"N" : shop, "E" : villagesouth, "S" : castle, "O" : None, "U" : None, "D" : None}
+        bridge.exits = {"N" : field, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        field.exits = {"N" : tower, "E" : None, "S" : None, "O" : villagesouth, "U" : None, "D" : None}
+        shop.exits = {"N" : None, "E" : villagenorth, "S" : stable, "O" : None, "U" : None, "D" : None}
 
         # Create set of directions
         self.exits = {d for d in tower.exits.keys()}
@@ -118,9 +120,12 @@ class Game:
         shield = Item("shield", "un bouclier pour se défendre", 3)
         
         #Setup item location
-
+        shop.inventory["potion"] = potion
+        castle.inventory["sword"] = sword
+        castle.inventory["shield"] = shield
 
         #Setup item player
+        self.player.inventory["money"] = money
 
     # Play the game
     def play(self):
