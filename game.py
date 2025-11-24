@@ -36,7 +36,11 @@ class Game:
         self.commands["back"] = back
         look = Command("look", " : afficher la liste des items présents dans cette pièce", Actions.look, 0)
         self.commands["look"] = look
-        
+        take = Command("take", " : prendre un Item présent dans la pièce où se situe le joueur", Actions.take, 1)
+        self.commands["take"] = take
+        drop = Command("take", " : déposer un Item de l'inventaire dans la pièce actuelle", Actions.drop, 1)
+        self.commands["drop"] = drop
+
         # Setup rooms
         villagenorth = Room("VillageNorth", "dans la partie nord du village.")
         self.rooms.append(villagenorth)

@@ -252,3 +252,102 @@ class Actions:
         print(f"{player.current_room.get_long_description()} {player.current_room.get_inventory()}")
         return True
 
+    def take(game, list_of_words, number_of_parameters):
+        """
+        Take an Item from the current room and place it in the player's inventory. 
+        The parameter must be the name of an Item that is present in the current room.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> take(game, ["take", "sword"], 1)
+        True
+        >>> take(game, ["take", "sword", "shield"], 1)
+        False
+        >>> take(game, ["go"], 1)
+        False
+
+        """
+        
+        player = game.player
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+
+        # Get the item name from the list of words.
+        item_name = list_of_words[1]
+
+        #Get the item from the current room.
+        item = player.current_room.inventory.get(item_name)
+
+        #Check if the requested item is present in the room.
+        if item is None :
+            print(f"\nAucun objet nommé {item_name} ne se trouve dans la pièce. Tapez look pour avoir la liste des objets disponibles dans cette pièce.\n")
+            return False
+        else :
+            player.inventory[item_name] = item
+            del player.current_room.inventory[item_name]
+            return True
+
+    def drop(game, list_of_words, number_of_parameters):
+        """
+        Drop an Item from the player's inventory in the current room. 
+        The parameter must be the name of an Item that is present in player's inventory.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> take(game, ["take", "sword"], 1)
+        True
+        >>> take(game, ["take", "sword", "shield"], 1)
+        False
+        >>> take(game, ["go"], 1)
+        False
+
+        """
+        
+        player = game.player
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+
+        # Get the item name from the list of words.
+        item_name = list_of_words[1]
+
+        # Get the item from the player's inventory.
+        item = player.inventory.get(item_name)
+
+        # Check if the requested item is present in the player's inventory.
+        if item is None :
+            print(f"\nAucun objet nommé {item_name} ne se trouve dans votre inventaire. Tapez check pour avoir le détail de votre inventaire.\n")
+            return False
+        else :
+            del player.inventory[item_name]
+            player.current_room.inventory[item_name] = item
+            return True
