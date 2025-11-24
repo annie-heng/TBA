@@ -9,6 +9,8 @@ class Player():
         current_room (Room) : The room where the player is currently located.
         history (list) : The list containing all the rooms that the player has visited, excluding the current one.
         inventory(dict) : The inventory of the player, in the form of a dict object where each key is the item's name and the value is the corresponding Item object.
+        max_weight (int) : The maximum total weight of Items that the player can carry.
+        current_weight (int) : The sum of each Item's weight from the player's inventory.
 
     Methods:
         __init__(self, name) : The constructor.
