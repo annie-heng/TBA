@@ -34,32 +34,38 @@ class Game:
         self.commands["history"] = history
         back = Command("back", " : revenir en arrière", Actions.back, 0)
         self.commands["back"] = back
+        look = Command("look", " : afficher la liste des items présents dans cette pièce", Actions.look, 0)
+        self.commands["look"] = look
         
         # Setup rooms
-        villagenorth = Room("VillageNorth", "la partie nord du village.")
+        villagenorth = Room("VillageNorth", "dans la partie nord du village.")
         self.rooms.append(villagenorth)
-        villagesouth = Room("VillageSouth", "la partie sud du village.")
+        villagesouth = Room("VillageSouth", "dans la partie sud du village.")
         self.rooms.append(villagesouth)
-        castle = Room("Castle", "un château aux murs sombres.")
+        castle = Room("Castle", "à l'intérieur d'un château aux murs sombres.")
         self.rooms.append(castle)
-        undercastle = Room("UnderCastle", "un sous-terrain faiblement éclairé par des torches.")
+        undercastle = Room("UnderCastle", "dans un sous-terrain faiblement éclairé par des torches.")
         self.rooms.append(undercastle)
-        tower = Room("Tower", "le hall d'une tour. Vous apercevez devant vous des escaliers menant au sommet, et d'autres cachés dans un recoin.")
+        tower = Room("Tower", "dans le hall d'une tour. Vous apercevez devant vous des escaliers menant au sommet, et d'autres cachés dans un recoin.")
         self.rooms.append(tower)
-        toptower = Room("TopTower", "une pièce minuscule au sommet de la tour.")
+        toptower = Room("TopTower", "dans une pièce minuscule au sommet de la tour.")
         self.rooms.append(toptower)
-        towercave = Room("BottomTower", "une cave encombrée d'objets poussiérieux.")
+        towercave = Room("BottomTower", "dans une cave encombrée d'objets poussiérieux.")
         self.rooms.append(towercave)
-        cave = Room("Cave", "une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci.")
+        cave = Room("Cave", "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci.")
         self.rooms.append(cave)
-        lake = Room("Lake", "une barque sur un lac.")
+        lake = Room("Lake", "dans une barque sur un lac.")
         self.rooms.append(lake)
-        forest = Room("Forest", "une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
+        forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
         self.rooms.append(forest)
-        stable = Room("Stable", "des écuries bien entretenues, où quelques chevaux se reposent.")
+        stable = Room("Stable", "dans des écuries bien entretenues, où quelques chevaux se reposent.")
         self.rooms.append(stable)
-        bridge = Room("Bridge", "sur un pont à l'aspect fragile")
+        bridge = Room("Bridge", "sur un pont à l'aspect fragile.")
         self.rooms.append(bridge)
+        field = Room("Field", "dans un champ de hautes herbes.")
+        self.rooms.append(field)
+        shop = Room("Shop", "dans une boutique d'items tenue par une vieille dame.")
+        self.rooms.append(shop)
 
         #tower = Room("Tower", "une immense tour en pierre qui s'élève au dessus des nuages.")
         #self.rooms.append(tower)
@@ -105,8 +111,16 @@ class Game:
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = villagesouth
 
-        #Setup player inventory
+        #Setup item
         sword = Item("sword", "une épée au fil tranchant comme un rasoir", 2)
+        money = Item("money", "une bourse pour débuter votre aventure", 2)
+        potion = Item("potion", "une potion de soin", 2)
+        shield = Item("shield", "un bouclier pour se défendre", 3)
+        
+        #Setup item location
+
+
+        #Setup item player
 
     # Play the game
     def play(self):

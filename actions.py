@@ -215,3 +215,40 @@ class Actions:
         # Move the player to the previous room.
         player.move_back()
         return True
+
+    def look(game, list_of_words, number_of_parameters):
+        """
+        Print the description and the list of items in the current room. 
+
+            Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+            Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+            Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> look(game, ["look"], 0)
+        True
+        >>> look(game, ["look", "N"], 0)
+        False
+        >>> look(game, ["look", "N", "E"], 0)
+        False
+        """
+        player = game.player
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        # Print the description and the list of items in the current room.
+        print(f"{player.current_room.get_long_description()} {player.current_room.get_inventory()}")
+        return True
+
