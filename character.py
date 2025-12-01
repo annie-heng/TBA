@@ -1,3 +1,4 @@
+import random 
 # Define the Character class.
 
 class Character():
@@ -39,3 +40,12 @@ class Character():
 
     def __str__(self):
         return f"{self.name} : {self.description}"
+
+    def move(self):
+        l = [x for x in self.current_room.exits.values() if x != None]
+        r = randint(0,1)
+        if r == 0:
+            next_room = random.choice(l)
+            current_room = next_room
+            return True
+        return False
