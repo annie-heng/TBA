@@ -2,16 +2,14 @@
 
 class Character():
     """
-    This class represents a player. A player is composed of a name, a history, an inventory and a current location.
+    This class represents a character. A character is composed of a name, a description, an current location and a message.
 
     Attributes:
         name (str): The name of the player.
-        current_room (Room) : The room where the player is currently located.
-        history (list) : The list containing all the rooms that the player has visited, excluding the current one.
-        inventory(dict) : The inventory of the player, in the form of a dict object where each key is the item's name and the value is the corresponding Item object.
-        max_weight (int) : The maximum total weight of Items that the player can carry.
-        current_weight (int) : The sum of each Item's weight from the player's inventory.
-        money (int) : The number of coins that the player owns.
+        description (str) : The description of the NPC.
+        current_room (Room) : The room where the chracter is currently located.
+        msgs(list) : The list of messages to print when the player interacts with the NPC.
+        
 
     Methods:
         __init__(self, name) : The constructor.
@@ -23,7 +21,7 @@ class Character():
 
     Examples:
     >>> from room import Room
-    >>> sam = Player("Sam")
+    >>> sam = Character("Sam")
     >>> sam.name
     "Sam"
     >>> kitchen = Room("cuisine", "Kitchen", "dans une cuisine moderne et bien illuminée.")
@@ -31,24 +29,21 @@ class Character():
     >>> bathroom = Room("Bathroom", "dans une salle de bain assez petite, pourvue d'une douche.")
     >>> kitchen.exits['N'] = bathroom
     >>> bathoom.exits['S'] = kitchen
-    >>> sam.move('N')
-    True
     >>> sam.current_room.name
     "Bathroom"
 
     """
 
     # Define the constructor.
-    def __init__(self, name):
+    def __init__(self, name, description,current_room, msgs):
         self.name = name
-        self.current_room = None
-        self.history = []
-        self.inventory = {}
-        self.max_weight = 4
-        self.current_weight = 0
-        self.money = 2
-        self.beamer_room = None
-    
+        self.description = description
+        self.current_room = current_room
+        self.msgs = msgs
+
+    def __str__(self):
+        return f"{self.name} : {self.description}"
+
     # Define the move method.
     def move(self, direction):
         # Get the next room from the exits dictionary of the current room.

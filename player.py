@@ -12,6 +12,7 @@ class Player():
         max_weight (int) : The maximum total weight of Items that the player can carry.
         current_weight (int) : The sum of each Item's weight from the player's inventory.
         money (int) : The number of coins that the player owns.
+        beamer_room (Room) : the memorised room in the beamer.
 
     Methods:
         __init__(self, name) : The constructor.
