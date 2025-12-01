@@ -42,6 +42,10 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " : afficher la liste des items présents dans l'inventaire du joueur", Actions.check, 0)
         self.commands["check"] = check
+        charge = Command("charge", " : si le beamer est dans l'inventaire, la pièce actuelle est mémorisée", Actions.charge, 0)
+        self.commands["charge"] = charge
+        use = Command("use", "use : utiliser un objet présent dans votre inventaire", Actions.use, 1)
+        self.commands["use"] = use
 
         # Setup rooms
         villagenorth = Room("VillageNorth", "dans la partie nord du village.")
@@ -127,6 +131,7 @@ class Game:
         torch = Item("torch", "une torche qui permet d'éclairer les lieux sombres", 3)
         ring = Item("ring", "une bague de valeur qui semble appartenir à quelqu'un d'important", 3)
         key = Item("key", "uné clé qui ouvre des portes", 3)
+        beamer = Item("beamer", "un objet permettant de \"mémoriser\" une pièce et de s'y téléporter", 1)
         
         #Setup item location
         shop.inventory["potion"] = potion
@@ -135,6 +140,7 @@ class Game:
         castle.inventory["money"] = money
         villagesouth.inventory["money"] = money
         stable.inventory["money"] = money
+        bridge.inventory["beamer"] = beamer
 
         #Setup item player
         

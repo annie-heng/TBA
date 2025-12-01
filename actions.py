@@ -274,7 +274,7 @@ class Actions:
         True
         >>> take(game, ["take", "sword", "shield"], 1)
         False
-        >>> take(game, ["go"], 1)
+        >>> take(game, ["take"], 1)
         False
 
         """
@@ -332,11 +332,11 @@ class Actions:
         >>> from game import Game
         >>> game = Game()
         >>> game.setup()
-        >>> take(game, ["take", "sword"], 1)
+        >>> drop(game, ["drop", "sword"], 1)
         True
-        >>> take(game, ["take", "sword", "shield"], 1)
+        >>> drop(game, ["drop", "sword", "shield"], 1)
         False
-        >>> take(game, ["go"], 1)
+        >>> drop(game, ["drop"], 1)
         False
 
         """
@@ -402,3 +402,98 @@ class Actions:
         # Print the description and the list of items in the current room.
         print(player.get_inventory())
         return True
+    
+    def charge(game, list_of_words, number_of_parameters):
+        """
+        Charge the beamer if it is present in the player's inventory.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> quit(game, ["charge"], 0)
+        True
+        >>> quit(game, ["charge", "beamer"], 0)
+        False
+        >>> quit(game, ["charge", "N", "E"], 0)
+        False
+
+        """
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        #Check if the beamer Item is present in the inventory.
+        player = game.player
+        if "beamer" not in player.inventory :
+            print("\nVous ne possédez aucun beamer à charger.\n")
+            return False
+        else :
+            player.beamer_room = player.current_room
+            print("\nLe beamer a été chargé. Tapez \"use beamer\" pour vous téléporter dans la pièce mémorisée.\n")
+            return True
+    
+    def use(game, list_of_words, number_of_parameters):
+        """
+        Use the specified Item. 
+        The parameter must be the name of an Item that is present in player's inventory.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> take(game, ["use", "beamer"], 1)
+        True
+        >>> take(game, ["use", "sword", "shield"], 1)
+        False
+        >>> take(game, ["use"], 1)
+        False
+
+        """
+        
+        player = game.player
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+
+        # Check if the given Item name is correct.
+        item_name = list_of_words[1]
+
+        # Get the item from the player's inventory.
+        item = player.inventory.get(item_name)
+
+        # Check if the requested item is present in the player's inventory.
+        if item is None :
+            print(f"\nAucun objet nommé {item_name} ne se trouve dans votre inventaire. Tapez check pour avoir le détail de votre inventaire.\n")
+            return False
+        
+        #Check if the requested item has an use.
+        if item_name == "beamer" :
+            player.teleport()
+            print("\nLe beamer a été utilisé et a disparu.\n")
+            return True
+            
