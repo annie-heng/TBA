@@ -121,18 +121,23 @@ class Game:
 
         #Setup item
         sword = Item("sword", "une épée au fil tranchant comme un rasoir", 2)
-        money = Item("money", "une bourse pour débuter votre aventure", 2)
+        money = Item("money", "une pièce d'argent", 0)
         potion = Item("potion", "une potion de soin", 2)
         shield = Item("shield", "un bouclier pour se défendre", 3)
+        torch = Item("torch", "une torche qui permet d'éclairer les lieux sombres", 3)
+        ring = Item("ring", "une bague de valeur qui semble appartenir à quelqu'un d'important", 3)
+        key = Item("key", "uné clé qui ouvre des portes", 3)
         
         #Setup item location
         shop.inventory["potion"] = potion
         castle.inventory["sword"] = sword
         castle.inventory["shield"] = shield
+        castle.inventory["money"] = money
+        villagesouth.inventory["money"] = money
+        stable.inventory["money"] = money
 
         #Setup item player
-        self.player.inventory["money"] = money
-        self.player.current_weight += money.weight
+        
 
     # Play the game
     def play(self):

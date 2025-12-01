@@ -11,6 +11,7 @@ class Player():
         inventory(dict) : The inventory of the player, in the form of a dict object where each key is the item's name and the value is the corresponding Item object.
         max_weight (int) : The maximum total weight of Items that the player can carry.
         current_weight (int) : The sum of each Item's weight from the player's inventory.
+        money (int) : The number of coins that the player owns.
 
     Methods:
         __init__(self, name) : The constructor.
@@ -44,6 +45,7 @@ class Player():
         self.inventory = {}
         self.max_weight = 4
         self.current_weight = 0
+        self.money = 2
     
     # Define the move method.
     def move(self, direction):
@@ -95,7 +97,7 @@ class Player():
 
         #If the inventory is empty, return a string indicating that no Item is present in the inventory.
         if len(self.inventory) == 0 :
-            return "\nVotre inventaire est vide.\n"
+            return "\nVotre inventaire est vide.\n"+f"\nVotre porte-monnaie contient {self.money} pièces.\n"
 
         inventory_string = "\nVous disposez des items suivants : \n"
         
@@ -103,4 +105,5 @@ class Player():
             #For each Item in the inventory, list its name, description and weight.
             inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)\n"
         inventory_string += f"\nVotre sac pèse {self.current_weight} kg\n"
+        inventory_string += f"\nVotre porte-monnaie contient {self.money} pièces.\n"
         return inventory_string 

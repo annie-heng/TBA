@@ -301,11 +301,18 @@ class Actions:
             print(f"\nL'objet '{item_name}' ne rentre pas dans votre sac. Il n'y a plus de place.\n")
             return False
         else :
-            player.inventory[item_name] = item
-            player.current_weight += item.weight
-            del player.current_room.inventory[item_name]
-            print(f"\nVous avez pris l'objet '{item_name}'.\n")
-            return True
+            # if the item is 'money', it is not added to the inventory but the attribute 'money' of the player is incremented.
+            if item_name == "money":
+                player.money += 1
+                del player.current_room.inventory[item_name]
+                print(f"\nVotre porte-monnaie a été incrémenté.\n")
+                return True
+            else :
+                player.inventory[item_name] = item
+                player.current_weight += item.weight
+                del player.current_room.inventory[item_name]
+                print(f"\nVous avez pris l'objet '{item_name}'.\n")
+                return True
 
     def drop(game, list_of_words, number_of_parameters):
         """
