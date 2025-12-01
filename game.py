@@ -7,6 +7,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from character import Character
 
 class Game:
 
@@ -142,8 +143,11 @@ class Game:
         stable.inventory["money"] = money
         bridge.inventory["beamer"] = beamer
 
-        #Setup item player
-        
+        #Setup player inventory
+
+        #Setup characters
+        king = Character("King", "le roi du pays, un guerrier exceptionnel qui a conquis de nombreux territoires", castle, ["Jeune aventurier, j'ai une mission pour toi. \nRetrouve ma bague, et je te ferai don d'un objet qui te sera indispensable pour ta quête."]) 
+        castle.characters["king"] = king      
 
     # Play the game
     def play(self):

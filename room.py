@@ -9,13 +9,14 @@ class Room:
         description (str) : A detailed description of the room.
         exits (dict) : a dict object. The keys are the directions, and the value associated with a key is the corresponding room.
         inventory(dict) : a dict object that lists all the Items that are present in the room. Keys are the names of the Items, and the values are the corresponding Item objects.
+        characters(dict) : a dict object that lists the characters that are present in the room. Keys are the names of the characters, and the values are the corresponding Character objects.
 
     Methods : 
         __init__(self, name, description) : The constructor.
         get_exit(self, direction) : If the requested direction is available, return the corresponding room. If not, returns None.
         get_exit_string(self) : The string listing all of the available exits/directions. 
         get_long_description(self) : The detailed description of the room, followed by the exits list. 
-        get_inventory(self) : Return a string listing the contents of the player's inventory.
+        get_inventory(self) : Return a string listing the Items and the Characters that are in the room.
 
     Examples :
 
@@ -45,6 +46,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
+        self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -72,12 +74,16 @@ class Room:
     def get_inventory(self) :
 
         #If the inventory is empty, return a string indicating that no Item is present in the Room.
-        if len(self.inventory) == 0 :
+        if len(self.inventory) == 0 and len(self.characters) == 0 :
             return "\nIl n'y a rien ici.\n"
 
-        inventory_string = "\nLa pièce contient : \n"
+        inventory_string = "\nOn voit : \n"
         
         for item in self.inventory.values() :
-            #For each Item in the Room, list it's name, description and weight.
+            #For each Item in the Room, list its name, description and weight.
             inventory_string += f"\t - {item.name} : {item.description} ({item.weight} kg)\n"
+
+        for character in self.characters.values() :
+            #For each character in the Room, list their name and description.
+            inventory_string += f"\t - {character.name} : {character.description}\n"
         return inventory_string
