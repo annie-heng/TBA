@@ -113,11 +113,6 @@ class Player():
     
     # Define the teleport method.
     def teleport(self) :
-        # Check if the beamer is charged.
-        if self.beamer_room == None :
-            print("\nVous n'avez pas chargé le beamer.\n")
-            return False
-        
         # Add the current_room to the history.
         self.history.append(self.current_room)
         # Change the current room to the "memorized" room.

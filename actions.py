@@ -493,6 +493,10 @@ class Actions:
         
         #Check if the requested item has an use.
         if item_name == "beamer" :
+            # Check if the beamer is charged.
+            if player.beamer_room == None :
+                print("\nVous n'avez pas chargé le beamer.\n")
+                return False  
             player.teleport()
             print("\nLe beamer a été utilisé et a disparu.\n")
             return True
