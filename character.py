@@ -14,6 +14,7 @@ class Character():
 
     Methods:
         __init__(self, name) : The constructor.
+        move(self) : Move the character to an adjacent room with a one in two chance. If the randomly chosen room is the cave, cancel the movement.
         
 
     Examples:
@@ -41,11 +42,20 @@ class Character():
     def __str__(self):
         return f"{self.name} : {self.description}"
 
+    # Define the move method
     def move(self):
         l = [x for x in self.current_room.exits.values() if x != None]
-        r = randint(0,1)
-        if r == 0:
+        r = random.choice([0, 1])
+        if r == 0 :
             next_room = random.choice(l)
-            current_room = next_room
+            #A NPC can not go inside the cave.
+            if next_room.name == "Cave":
+                return False
+            #Remove the NPC from the current room.
+            del self.current_room.characters[self.name]
+
+            self.current_room = next_room
+            #Add the NPC to the new room.
+            self.current_room.characters[self.name] = self
             return True
         return False
