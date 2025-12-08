@@ -1,3 +1,5 @@
+from game import DEBUG
+
 # Description: The actions module.
 
 # The actions module contains the functions that are called when a command is executed.

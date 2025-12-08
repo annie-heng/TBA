@@ -1,3 +1,4 @@
+from game import DEBUG
 import random 
 # Define the Character class.
 

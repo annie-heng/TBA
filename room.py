@@ -1,3 +1,5 @@
+from game import DEBUG
+
 # Define the Room class.
 
 class Room:

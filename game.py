@@ -9,6 +9,8 @@ from actions import Actions
 from item import Item
 from character import Character
 
+DEBUG = False
+
 class Game:
 
     # Constructor
@@ -182,7 +184,9 @@ class Game:
         else:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
-            self.characters.get("timmy").move()
+            # Characters move only if the player uses the command "go". 
+            if command_word == "go":
+                self.characters.get("timmy").move()
 
 
     # Print the welcome message
