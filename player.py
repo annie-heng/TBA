@@ -1,5 +1,3 @@
-from game import DEBUG
-
 # Define the Player class.
 
 class Player():

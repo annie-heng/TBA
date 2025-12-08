@@ -1,5 +1,5 @@
-from game import DEBUG
 import random 
+
 # Define the Character class.
 
 class Character():
@@ -16,6 +16,7 @@ class Character():
     Methods:
         __init__(self, name) : The constructor.
         move(self) : Move the character to an adjacent room with a one in two chance. If the randomly chosen room is the cave, cancel the movement.
+        get_msg(self) : Return the message in first position in the msgs attribute, remove it and add it at the end of the msgs attribute.
         
 
     Examples:
@@ -60,3 +61,11 @@ class Character():
             self.current_room.characters[self.name] = self
             return True
         return False
+
+    #Define the get_msg method
+    def get_msg(self):
+        #Get the first message in line
+        message = self.msgs.pop(0)
+        #Add it back in last position
+        self.msgs.append(message)
+        return message

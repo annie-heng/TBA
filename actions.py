@@ -1,5 +1,3 @@
-from game import DEBUG
-
 # Description: The actions module.
 
 # The actions module contains the functions that are called when a command is executed.
@@ -498,4 +496,52 @@ class Actions:
             player.teleport()
             print("\nLe beamer a été utilisé et a disparu.\n")
             return True
-            
+    
+    def talk(game, list_of_words, number_of_parameters):
+        """
+        Talk to a NPC that is present in the current room.
+        The parameter must be a present NPC's name.
+
+        Args:
+            game (Game): The game object.
+            list_of_words (list): The list of words in the command.
+            number_of_parameters (int): The number of parameters expected by the command.
+
+        Returns:
+            bool: True if the command was executed successfully, False otherwise.
+
+        Examples:
+        
+        >>> from game import Game
+        >>> game = Game()
+        >>> game.setup()
+        >>> talk(game, ["talk", "Timmy"], 1)
+        True
+        >>> talk(game, ["talk", "Timmy", "Tommy"], 1)
+        False
+        >>> talk(game, ["talk"], 1)
+        False
+
+        """
+        
+        player = game.player
+        l = len(list_of_words)
+        # If the number of parameters is incorrect, print an error message and return False.
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+
+        # Get the character name from the list of words.
+        character_name = list_of_words[1]
+
+        # Find the NPC in the current room.
+        character = player.current_room.characters.get(character_name)
+
+        #Check if the NPC is present in the room.
+        if character is None :
+            print(f"\nAucun personnage nommé {character_name} ne se trouve dans la pièce. Tapez look pour avoir la liste des personnages présents dans cette pièce.\n")
+            return False
+        else :
+            print(f"\n{character.get_msg()}\n")
+            return True

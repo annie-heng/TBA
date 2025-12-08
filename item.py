@@ -1,5 +1,3 @@
-from game import DEBUG
-
 # Define the Item class.
 
 class Item:

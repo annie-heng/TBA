@@ -50,6 +50,8 @@ class Game:
         self.commands["charge"] = charge
         use = Command("use", " : utiliser un objet présent dans votre inventaire", Actions.use, 1)
         self.commands["use"] = use
+        talk = Command("talk", " : parler à un personnage présent dans la pièce", Actions.talk, 1)
+        self.commands["talk"] = talk
 
         # Setup rooms
         villagenorth = Room("VillageNorth", "dans la partie nord du village.")
@@ -150,11 +152,11 @@ class Game:
 
         #Setup characters
         king = Character("King", "le roi du pays, un guerrier exceptionnel qui a conquis de nombreux territoires", castle, ["Jeune aventurier, j'ai une mission pour toi. \nRetrouve ma bague, et je te ferai don d'un objet qui te sera indispensable pour ta quête."]) 
-        castle.characters["king"] = king
-        self.characters["king"] = king 
-        timmy = Character("timmy", "un enfant du village qui adore explorer et ne se trouve jamais longtemps au même endroit, au grand dam de ses parents", villagenorth, ["C'est parti pour l'aventure!", "J'ai envie de bonbons...", "Où est-ce que je peux aller?"])
-        villagenorth.characters["timmy"] = timmy
-        self.characters["timmy"] = timmy
+        castle.characters["King"] = king
+        self.characters["King"] = king 
+        timmy = Character("Timmy", "un enfant du village qui adore explorer et ne se trouve jamais longtemps au même endroit, au grand dam de ses parents", villagenorth, ["C'est parti pour l'aventure!", "J'ai envie de bonbons...", "Où est-ce que je peux aller?"])
+        villagenorth.characters["Timmy"] = timmy
+        self.characters["Timmy"] = timmy
 
     # Play the game
     def play(self):
@@ -186,7 +188,7 @@ class Game:
             command.action(self, list_of_words, command.number_of_parameters)
             # Characters move only if the player uses the command "go". 
             if command_word == "go":
-                self.characters.get("timmy").move()
+                self.characters.get("Timmy").move()
 
 
     # Print the welcome message
