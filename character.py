@@ -69,3 +69,7 @@ class Character():
         #Add it back in last position
         self.msgs.append(message)
         return message
+
+    def get_location(self):
+        location = f"\n{self.name} se situe {self.current_room.description}\n"
+        return location

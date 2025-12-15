@@ -747,6 +747,13 @@ class Actions:
             player.teleport()
             print("\nLe beamer a été utilisé et a disparu.\n")
             return True
+
+        if item_name == "magicmap" :
+            location_list = ""
+            for charac in game.characters.values() :
+                location_list += charac.get_location()
+            print(location_list)
+            return True
     
     @staticmethod
     def talk(game, list_of_words, number_of_parameters):

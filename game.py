@@ -195,6 +195,7 @@ class Game:
         ring = Item("ring", "une bague de valeur qui semble appartenir à quelqu'un d'important", 3)
         key = Item("key", "uné clé qui ouvre des portes", 3)
         beamer = Item("beamer", "un objet permettant de \"mémoriser\" une pièce et de s'y téléporter", 1)
+        magicmap = Item("magicmap", "une carte permettant de voir les localisations de tous les villageois", 1)
         
         #Setup item location
         self.rooms[13].inventory["potion"] = potion     # shop
@@ -205,6 +206,7 @@ class Game:
         self.rooms[1].inventory["money"] = money        # villagesouth
         self.rooms[9].inventory["money"] = money        # stable
         self.rooms[10].inventory["beamer"] = beamer     # bridge
+        self.rooms[8].inventory["magicmap"] = magicmap  #undercastle
         
     def _setup_characters(self):
         """Initialize the Characters and their locations"""
