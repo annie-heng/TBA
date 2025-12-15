@@ -1,5 +1,7 @@
 # Define the Player class.
 
+from quest import QuestManager
+
 class Player():
     """
     This class represents a player. A player is composed of a name, a history, an inventory and a current location.
@@ -49,6 +51,9 @@ class Player():
         self.current_weight = 0
         self.money = 2
         self.beamer_room = None
+        self.move_count = 0
+        self.quest_manager = QuestManager(self)
+        self.rewards = []  # List to store earned rewards
     
     # Define the move method.
     def move(self, direction):
@@ -66,6 +71,15 @@ class Player():
         self.current_room = next_room
         print(self.current_room.get_long_description())
         #print(self.get_history())
+
+        
+        # Check room visit objectives
+        self.quest_manager.check_room_objectives(self.current_room.name)
+
+        # Increment move counter and check movement objectives
+        self.move_count += 1
+        self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+
         return True
     
     #Define the get_history method.
@@ -93,6 +107,14 @@ class Player():
         self.current_room = self.history.pop()
         print(self.current_room.get_long_description())
         #print(self.get_history())
+
+         # Check room visit objectives
+        self.quest_manager.check_room_objectives(self.current_room.name)
+
+        # Increment move counter and check movement objectives
+        self.move_count += 1
+        self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+
         return True
 
     #Define the get_inventory method.
@@ -121,4 +143,66 @@ class Player():
         self.beamer_room = None
         # Delete the beamer from the inventory because it has a one-time use.
         del self.inventory["beamer"]
+
+         # Check room visit objectives
+        self.quest_manager.check_room_objectives(self.current_room.name)
+
+        # Increment move counter and check movement objectives
+        self.move_count += 1
+        self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+
         return True
+
+    def add_reward(self, reward):
+        """
+        Add a reward to the player's rewards list.
+        
+        Args:
+            reward (str): The reward to add.
+            
+        Examples:
+        
+        >>> player = Player("Bob")
+        >>> player.add_reward("Épée magique") # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        🎁 Vous avez obtenu: Épée magique
+        <BLANKLINE>
+        >>> "Épée magique" in player.rewards
+        True
+        >>> player.add_reward("Épée magique") # Adding same reward again
+        >>> len(player.rewards)
+        1
+        """
+        if reward and reward not in self.rewards:
+            self.rewards.append(reward)
+            print(f"\n🎁 Vous avez obtenu: {reward}\n")
+
+
+    def show_rewards(self):
+        """
+        Display all rewards earned by the player.
+        
+        Examples:
+        
+        >>> player = Player("Charlie")
+        >>> player.show_rewards() # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        🎁 Aucune récompense obtenue pour le moment.
+        <BLANKLINE>
+        >>> player.add_reward("Bouclier d'or") # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        🎁 Vous avez obtenu: Bouclier d'or
+        <BLANKLINE>
+        >>> player.show_rewards() # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        🎁 Vos récompenses:
+        • Bouclier d'or
+        <BLANKLINE>
+        """
+        if not self.rewards:
+            print("\n🎁 Aucune récompense obtenue pour le moment.\n")
+        else:
+            print("\n🎁 Vos récompenses:")
+            for reward in self.rewards:
+                print(f"  • {reward}")
+            print()
