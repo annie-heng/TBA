@@ -208,20 +208,24 @@ class Game:
         
     def _setup_characters(self):
         """Initialize the Characters and their locations"""
-        king = Character("King", "le roi du pays, un guerrier exceptionnel qui a conquis de nombreux territoires", self.rooms[7], ["Jeune aventurier, j'ai une mission pour toi. \nRetrouve ma bague, et je te ferai don d'un objet qui te sera indispensable pour ta quête."]) 
+        king = Character("King", "le roi du pays, un guerrier exceptionnel qui a conquis de nombreux territoires", self.rooms[7], ["Jeune aventurier, j'ai une mission pour toi.", "Retrouve ma bague, et je te ferai don d'un objet qui te sera indispensable pour ta quête."]) 
         self.rooms[7].characters["King"] = king     # castle
-        self.characters["King"] = king 
+        self.characters["King"] = king
 
         timmy = Character("Timmy", "un enfant du village qui adore explorer et ne se trouve jamais longtemps au même endroit, au grand dam de ses parents", self.rooms[0], ["C'est parti pour l'aventure!", "J'ai envie de bonbons...", "Où est-ce que je peux aller?"])
         self.rooms[0].characters["Timmy"] = timmy   # villagenorth
         self.characters["Timmy"] = timmy
 
+        shopkeeper = Character("Shopkeeper", "le seul vendeur du royaume, demandez lui n'importe quoi ça vous sera utile", self.rooms[13], ["Bonjour, que puis-je faire pour vous ?", "Tu peux aussi récolter des items à travers le pays."])
+        self.rooms[13].characters["Shopkeeper"] = shopkeeper   # shop
+        self.characters["Shopkeeper"] = shopkeeper
+
     def _setup_quests(self):
         """Initialize all quests."""
-        saving_quest = Quest(
-            title="Timmy, reviens à la maison !",
-            description="Retrouver Timmy et lui parler.",
-            objectives=["Parler avec Timmy"],
+        talking_quest = Quest(
+            title="Prévenir le peuple",
+            description="Aller voir chaque membre du royaume pour les prévenir du danger.",
+            objectives=["Parler avec Timmy", "Parler avec King", "Parler avec Shopkeeper" ],
             reward="Un paquet de bonbons"
         )
 
@@ -232,7 +236,7 @@ class Game:
             reward="Un talisman puissant permettant de résister aux flammes"
         )
 
-        self.player.quest_manager.add_quest(saving_quest)
+        self.player.quest_manager.add_quest(talking_quest)
         self.player.quest_manager.add_quest(ring_quest)
     
     """

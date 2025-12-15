@@ -76,10 +76,10 @@ class Actions:
 
                 # Characters move only if the player uses the command "go". 
                 for character in game.characters :
-                    if character == "King":
+                    if character in ["King", "Shopkeeper"]:
                         continue
                     npc = game.characters.get(character)
-                    if npc != NULL :
+                    if npc :
                         npc.move()
                 return True
                 
