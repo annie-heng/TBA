@@ -43,9 +43,9 @@ class Actions:
         >>> game.setup("TestPlayer")
         >>> Actions.go(game, ["go", "N"], 1)
         <BLANKLINE>
-        Vous êtes dans une immense tour en pierre qui s'élève au dessus des nuages.
+        Vous êtes dans la partie nord du village.
         <BLANKLINE>
-        Sorties: N, S, O
+        Sorties: N, E, S, O
         <BLANKLINE>
         True
         >>> Actions.go(game, ["go", "N", "E"], 1)
@@ -386,28 +386,50 @@ class Actions:
     @staticmethod
     def history(game, list_of_words, number_of_parameters):
         """
-        Print the history of the player.
-
-            Args:
+        Print the list of available commands.
+        
+        Args:
             game (Game): The game object.
             list_of_words (list): The list of words in the command.
             number_of_parameters (int): The number of parameters expected by the command.
 
-            Returns:
+        Returns:
             bool: True if the command was executed successfully, False otherwise.
 
-            Examples:
-        
+        Examples:
+
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> history(game, ["history"], 0)
+        >>> game.setup("TestPlayer")
+        >>> Actions.history(game, ["history"], 0) # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        Vous n'avez pas encore d'historique, déplacez-vous !
+        <BLANKLINE>
         True
-        >>> history(game, ["history", "N"], 0)
-        False
-        >>> history(game, ["history", "N", "E"], 0)
-        False
+        >>> Actions.go(game, ["go", "N"], 1)
+        <BLANKLINE>
+        Vous êtes dans la partie nord du village.
+        <BLANKLINE>
+        Sorties: N, E, S, O
+        <BLANKLINE>
+        True
+        >>> Actions.history(game, ["history"], 0) # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        Votre parcours est le suivant : 
+            - dans la partie sud du village
+        <BLANKLINE>
+        True
+        >>> Actions.history(game, ["history", "N"], 0)
+        <BLANKLINE>
+        La commande 'history' ne prend pas de paramètre.
+        <BLANKLINE>
+         >>> Actions.history(game, ["history", "N", "E"], 0)
+        <BLANKLINE>
+        La commande 'history' ne prend pas de paramètre.
+        <BLANKLINE>
+
         """
+    
         player = game.player
         # If the number of parameters is incorrect, print an error message and return False.
         l = len(list_of_words)
@@ -422,29 +444,40 @@ class Actions:
 
     @staticmethod
     def back(game, list_of_words, number_of_parameters):
+
         """
-        Move the player in the last room that has been visited. 
-
-            Args:
-            game (Game): The game object.
-            list_of_words (list): The list of words in the command.
-            number_of_parameters (int): The number of parameters expected by the command.
-
-            Returns:
-            bool: True if the command was executed successfully, False otherwise.
-
-            Examples:
-        
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> back(game, ["back"], 0)
+        >>> game.setup("TestPlayer")
+        >>> Actions.back(game, ["back"], 0) # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        Impossible de retourner en arrière ! Votre historique est vide.
+        <BLANKLINE>
+        >>> Actions.go(game, ["go", "N"], 1)
+        <BLANKLINE>
+        Vous êtes dans la partie nord du village.
+        <BLANKLINE>
+        Sorties: N, S, E, O
+        <BLANKLINE>
         True
-        >>> back(game, ["back", "N"], 0)
-        False
-        >>> back(game, ["back", "N", "E"], 0)
-        False
+        >>> Actions.back(game, ["back"], 0) # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        Vous êtes dans la partie sud du village.
+        <BLANKLINE>
+        Sorties: N, E, S, O
+        <BLANKLINE>
+        True
+        >>> Actions.back(game, ["back", "N"], 0)
+        <BLANKLINE>
+        La commande 'back' ne prend pas de paramètre.
+        <BLANKLINE>
+         >>> Actions.back(game, ["back", "N", "E"], 0)
+        <BLANKLINE>
+        La commande 'back' ne prend pas de paramètre.
+        <BLANKLINE>
+
         """
+
         player = game.player
         # If the number of parameters is incorrect, print an error message and return False.
         l = len(list_of_words)

@@ -14,7 +14,10 @@ class Player():
         max_weight (int) : The maximum total weight of Items that the player can carry.
         current_weight (int) : The sum of each Item's weight from the player's inventory.
         money (int) : The number of coins that the player owns.
-        beamer_room (Room) : the memorised room in the beamer.
+        beamer_room (Room) : The memorised room in the beamer.
+        move_count : The number of moves the player has made.
+        quest_manager (QuestManager) : The player's quest manager, which checks if objectives or tasks have been completed.
+        rewards (list) : A list that contains all the rewards (String objects) the player has received.
 
     Methods:
         __init__(self, name) : The constructor.
@@ -23,12 +26,14 @@ class Player():
         move_back(self) : If the history is not empty, get the last object of the history attribute, removes it from self.history, set it as the current room and return True.
         get_inventory(self) : Return a string listing the contents of the player's inventory.
         teleport(self) : Teleports the player to the Room that is contained in the beamer_room attribute.
+        add_reward (self, reward) : Add a reward to the player's rewards list.
+        show_rewards (self) : Display all rewards earned by the player.
 
     Examples:
     >>> from room import Room
     >>> sam = Player("Sam")
     >>> sam.name
-    "Sam"
+    'Sam'
     >>> kitchen = Room("cuisine", "Kitchen", "dans une cuisine moderne et bien illuminée.")
     >>> sam.current_room = kitchen
     >>> bathroom = Room("Bathroom", "dans une salle de bain assez petite, pourvue d'une douche.")
@@ -43,6 +48,20 @@ class Player():
 
     # Define the constructor.
     def __init__(self, name):
+        """
+
+        The constructor.
+
+        Args : 
+            name(str) : The name entered by the player.
+
+        Examples :
+        
+        >>> player = Player("Bob")
+        >>> player.name
+        Bob
+
+        """
         self.name = name
         self.current_room = None
         self.history = []
@@ -57,6 +76,52 @@ class Player():
     
     # Define the move method.
     def move(self, direction):
+        """
+        Get the next room from the exits dictionary of the current room, 
+        set it as the current room and return True. If the next room is None, 
+        print an error message and return False.
+
+        Args :
+            direction (str) : The direction entered by the player. (N | S | E | O | U |D)
+
+
+        Returns:
+            bool: True if the move was successful, False otherwise.
+            
+        Examples:
+        
+        >>> from room import Room
+        >>> player = Player("Dave")
+        >>> room1 = Room("Room1", "in room 1")
+        >>> room2 = Room("Room2", "in room 2")
+        >>> room3 = Room("Room3", "in room 3")
+        >>> room1.exits = {"N": room2, "E": None, "S": None, "O": None}
+        >>> room2.exits = {"S": room1, "E": room3, "S": None, "O": None}
+        >>> player.current_room = room1
+        >>> player.move_count
+        0
+        >>> player.move("N")
+        <BLANKLINE>
+        Vous êtes in room 2
+        <BLANKLINE>
+        Sorties: E
+        <BLANKLINE>
+        True
+        >>> player.move_count
+        1
+        >>> player.current_room.name
+        'Room2'
+        >>> player.move("E")
+        <BLANKLINE>
+        Vous êtes in room 3
+        <BLANKLINE>
+        Sorties:
+        <BLANKLINE>
+        True
+        >>> player.move_count
+        2
+        """
+
         # Get the next room from the exits dictionary of the current room.
         next_room = self.current_room.exits[direction]
         
@@ -85,6 +150,37 @@ class Player():
     #Define the get_history method.
     def get_history(self) :
 
+        """
+        Provides a history of the player's movements.
+
+        Returns : 
+            string : contains the descriptions of all of the rooms that the player has visited, 
+            in order. If the history attribute is empty, contains the corresponding message.
+
+        Examples :
+        >>> from room import Room
+        >>> alice = Player("Alice")
+        >>> alice.history()  # doctest: +NORMALIZE_WHITESPACE
+        <BLANKLINE>
+        Vous n'avez pas encore d'historique, déplacez-vous !
+        <BLANKLINE>
+        >>> room1 = Room("Room1", "in room 1")
+        >>> room2 = Room("Room2", "in room 2")
+        >>> room1.exits = {"N": room2, "E": None, "S": None, "O": None}
+        >>> room2.exits = {"S": room1, "E": room3, "S": None, "O": None}
+        >>> alice.current_room = room1
+        >>> alice.move('N')
+        <BLANKLINE>
+        Vous êtes in room 2
+        <BLANKLINE>
+        Sorties: E
+        <BLANKLINE>
+        True
+        >>> alice.get_history()
+        '\nVotre parcours est le suivant :\n\t- in room 1\n'
+        """
+
+
         #If the player has not moved, return a string indicating that no moves have been made yet.
         if len(self.history) == 0 :
             return "\nVous n'avez pas encore d'historique, déplacez-vous !\n"
@@ -97,6 +193,51 @@ class Player():
 
     #Define the move_back method
     def move_back(self) :
+        """ 
+        Move the player in the last room they visited.
+
+        Returns :
+            bool : True if the move was successful, False otherwise.
+
+        Examples : 
+
+        >>> from room import Room
+        >>> player = Player("Dave")
+        >>> room1 = Room("Room1", "in room 1")
+        >>> room2 = Room("Room2", "in room 2")
+        >>> room1.exits = {"N": room2, "E": None, "S": None, "O": None}
+        >>> player.current_room = room1
+        >>> player.move_count
+        0
+        >>> player.history
+        []
+        >>> player.move("N")
+        <BLANKLINE>
+        Vous êtes in room 2
+        <BLANKLINE>
+        Sorties: E
+        <BLANKLINE>
+        True
+        >>> player.move_count
+        1
+        >>> player.current_room.name
+        'Room2'
+        >>> player.history
+        [Room1]
+        >>> player.move_back()
+        <BLANKLINE>
+        Vous êtes in room 1
+        <BLANKLINE>
+        Sorties: N
+        <BLANKLINE>
+        True
+        >>> player.move_count
+        2
+        >>> player.history
+        []
+
+        """
+ 
 
         #If the player has no history, print an error message and return False.
         if len(self.history) == 0 :
