@@ -48,6 +48,14 @@ class Actions:
         Sorties: N, E, S, O
         <BLANKLINE>
         True
+         >>> Actions.go(game, ["go", "W"], 1)
+        <BLANKLINE>
+        Direction 'W' non reconnue.
+        <BLANKLINE>
+        Vous êtes dans la partie nord du village.
+        <BLANKLINE>
+        Sorties: N, E, S, O
+        <BLANKLINE>
         >>> Actions.go(game, ["go", "N", "E"], 1)
         <BLANKLINE>
         La commande 'go' prend 1 seul paramètre.
@@ -507,14 +515,30 @@ class Actions:
         
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> look(game, ["look"], 0)
+        >>> game.setup("TestPlayer")
+        >>> Actions.look(game, ["look"], 0)
+        <BLANKLINE>
+        Vous êtes dans la partie sud du village.
+        <BLANKLINE>
+        Sorties: N, E, S, O
+        <BLANKLINE>
+        On voit : 
+            - money : une pièce d'argent (0 kg)
+        <BLANKLINE>
         True
-        >>> look(game, ["look", "N"], 0)
+        >>> Actions.look(game, ["look", "N"], 0)
+        <BLANKLINE>
+        La commande 'look' ne prend pas de paramètre.
+        <BLANKLINE>
         False
-        >>> look(game, ["look", "N", "E"], 0)
+        >>> Actions.look(game, ["look", "N", "E"], 0)
+        <BLANKLINE>
+        La commande 'look' ne prend pas de paramètre.
+        <BLANKLINE>
         False
+
         """
+        
         player = game.player
         # If the number of parameters is incorrect, print an error message and return False.
         l = len(list_of_words)
@@ -545,12 +569,36 @@ class Actions:
         
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> take(game, ["take", "sword"], 1)
+        >>> game.setup("TestPlayer")
+        >>> Actions.take(game, ["take", "money"], 1)
+        <BLANKLINE>
+        Votre porte-monnaie a été incrémenté.
+        <BLANKLINE>
         True
-        >>> take(game, ["take", "sword", "shield"], 1)
+        >>> Actions.take(game, ["take", "sword"], 1)
+        <BLANKLINE>
+        Vous avez pris l'objet 'sword'.
+        <BLANKLINE>
+        True
+        >>> Actions.take(game, ["take", "shield"], 1)
+        <BLANKLINE>
+        L'objet 'shield' ne rentre pas dans votre sac. Il n'y a plus de place.
+        <BLANKLINE>
         False
-        >>> take(game, ["take"], 1)
+        >>> Actions.take(game, ["take", "pi"], 1)
+        <BLANKLINE>
+        Aucun objet nommé pi ne se trouve dans la pièce. Tapez look pour avoir la liste des objets disponibles dans cette pièce.
+        <BLANKLINE>
+        False
+        >>> Actions.take(game, ["take", "sword", "shield"], 1)
+        <BLANKLINE>
+        La commande 'take' prend 1 seul paramètre.
+        <BLANKLINE>
+        False
+        >>> Actions.take(game, ["take"], 1)
+        <BLANKLINE>
+        La commande 'take' prend 1 seul paramètre.
+        <BLANKLINE>
         False
 
         """
@@ -609,12 +657,31 @@ class Actions:
         
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> drop(game, ["drop", "sword"], 1)
-        True
-        >>> drop(game, ["drop", "sword", "shield"], 1)
+        >>> game.setup("TestPlayer")
+        >>> Actions.drop(game, ["drop", "money"], 1)
+        <BLANKLINE>
+        Aucun objet nommé money ne se trouve dans votre inventaire. Tapez check pour avoir le détail de votre inventaire.
+        <BLANKLINE>
         False
-        >>> drop(game, ["drop"], 1)
+        >>> Actions.take(game, ["take", "sword"], 1)
+        <BLANKLINE>
+        Vous avez pris l'objet 'sword'.
+        <BLANKLINE>
+        True
+        >>> Actions.drop(game, ["drop", "sword"], 1)
+        <BLANKLINE>
+        Vous avez déposé l'objet 'sword'.
+        <BLANKLINE>
+        True
+        >>> Actions.drop(game, ["drop", "sword", "shield"], 1)
+        <BLANKLINE>
+        La commande 'drop' prend 1 seul paramètre.
+        <BLANKLINE>
+        False
+        >>> Actions.drop(game, ["drop"], 1)
+        <BLANKLINE>
+        La commande 'drop' prend 1 seul paramètre.
+        <BLANKLINE>
         False
 
         """
@@ -661,12 +728,38 @@ class Actions:
         
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> check(game, ["check"], 0)
+        >>> game.setup("TestPlayer")
+        >>> Actions.check(game, ["check"], 0)
+        <BLANKLINE>
+        Votre inventaire est vide.
+        <BLANKLINE>
+        Votre porte-monnaie contient 2 pièces.
+        <BLANKLINE>
         True
-        >>> check(game, ["check", "N"], 0)
+        >>> Actions.take(game, ["take", "sword"], 1)
+        <BLANKLINE>
+        Vous avez pris l'objet 'sword'.
+        <BLANKLINE>
+        True
+        >>> Actions.check(game, ["check"], 0)
+        <BLANKLINE>
+        Vous disposez des items suivants : 
+            - sword : une épée au fil tranchant comme un rasoir (2 kg)
+        <BLANKLINE>
+        Votre sac pèse 2 kg
+        <BLANKLINE>
+        Votre porte-monnaie contient 2 pièces.
+        <BLANKLINE>
+        True
+        >>> Actions.check(game, ["check", "N"], 0)
+        <BLANKLINE>
+        La commande 'check' ne prend pas de paramètre.
+        <BLANKLINE>
         False
-        >>> check(game, ["check", "N", "E"], 0)
+        >>> Actions.check(game, ["check", "N", "E"], 0)
+        <BLANKLINE>
+        La commande 'check' ne prend pas de paramètre.
+        <BLANKLINE>
         False
         """
         player = game.player
@@ -698,12 +791,31 @@ class Actions:
 
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> quit(game, ["charge"], 0)
-        True
-        >>> quit(game, ["charge", "beamer"], 0)
+        >>> game.setup("TestPlayer")
+        >>> Actions.charge(game, ["charge"], 0)
+        <BLANKLINE>
+        Vous ne possédez aucun beamer à charger.
+        <BLANKLINE>
         False
-        >>> quit(game, ["charge", "N", "E"], 0)
+        >>> Actions.take(game, ["take", "beamer"], 1)
+        <BLANKLINE>
+        Vous avez pris l'objet 'beamer'.
+        <BLANKLINE>
+        True
+        >>> Actions.charge(game, ["charge"], 0)
+        <BLANKLINE>
+        Le beamer a été chargé. Tapez "use beamer" pour vous téléporter dans la pièce mémorisée.
+        <BLANKLINE>
+        True
+        >>> Actions.charge(game, ["charge", "beamer"], 0)
+        <BLANKLINE>
+        La commande 'charge' ne prend pas de paramètre.
+        <BLANKLINE>
+        False
+        >>> Actions.charge(game, ["charge", "N", "E"], 0)
+        <BLANKLINE>
+        La commande 'charge' ne prend pas de paramètre.
+        <BLANKLINE>
         False
 
         """
@@ -742,12 +854,56 @@ class Actions:
         
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> take(game, ["use", "beamer"], 1)
+        >>> game.setup("TestPlayer")
+        >>> Actions.take(game, ["take", "beamer"], 1)
+        <BLANKLINE>
+        Vous avez pris l'objet 'beamer'.
+        <BLANKLINE>
         True
-        >>> take(game, ["use", "sword", "shield"], 1)
+        >>> Actions.use(game, ["use", "beamer"], 1)
+        <BLANKLINE>
+        Vous n'avez pas chargé le beamer.
+        <BLANKLINE>
         False
-        >>> take(game, ["use"], 1)
+        >>> Actions.charge(game, ["charge"], 0)
+        <BLANKLINE>
+        Le beamer a été chargé. Tapez "use beamer" pour vous téléporter dans la pièce mémorisée.
+        <BLANKLINE>
+        True
+        >>> Actions.use(game, ["use", "beamer"], 1)
+        <BLANKLINE>
+        Vous êtes sur un pont à l'aspect fragile.
+        <BLANKLINE>
+        Sorties: N
+        <BLANKLINE>
+        <BLANKLINE>
+        Le beamer a été utilisé et a disparu.
+        <BLANKLINE>
+        True
+        >>> Actions.use(game, ["use", "pi"], 1)
+        <BLANKLINE>
+        Aucun objet nommé pi ne se trouve dans votre inventaire. Tapez check pour avoir le détail de votre inventaire.
+        <BLANKLINE>
+        False
+        >>> Actions.take(game, ["take", "sword"], 1)
+        <BLANKLINE>
+        Vous avez pris l'objet 'sword'.
+        <BLANKLINE>
+        True
+        >>> Actions.use(game, ["use", "sword"], 1)
+        <BLANKLINE>
+        L'objet 'sword' n'est pas utilisable.
+        <BLANKLINE>
+        False
+        >>> Actions.use(game, ["use", "sword", "shield"], 1)
+        <BLANKLINE>
+        La commande 'use' prend 1 seul paramètre.
+        <BLANKLINE>
+        False
+        >>> Actions.use(game, ["use"], 1)
+        <BLANKLINE>
+        La commande 'use' prend 1 seul paramètre.
+        <BLANKLINE>
         False
 
         """
@@ -787,6 +943,10 @@ class Actions:
                 location_list += charac.get_location()
             print(location_list)
             return True
+
+        else :
+            print(f"\nL'objet '{item_name}' n'est pas utilisable.\n")
+            return False
     
     @staticmethod
     def talk(game, list_of_words, number_of_parameters):
@@ -806,12 +966,31 @@ class Actions:
         
         >>> from game import Game
         >>> game = Game()
-        >>> game.setup()
-        >>> talk(game, ["talk", "Timmy"], 1)
+        >>> game.setup("TestPlayer")
+        >>> Actions.talk(game, ["talk", "King"], 1)
+        <BLANKLINE>
+        Jeune aventurier, j'ai une mission pour toi.
+        <BLANKLINE>
         True
-        >>> talk(game, ["talk", "Timmy", "Tommy"], 1)
+        >>> Actions.talk(game, ["talk", "King"], 1)
+        <BLANKLINE>
+        Retrouve ma bague, et je te ferai don d'un objet qui te sera indispensable pour ta quête.
+        <BLANKLINE>
+        True
+        >>> Actions.talk(game, ["talk", "pi"], 1)
+        <BLANKLINE>
+        Aucun personnage nommé pi ne se trouve dans la pièce. Tapez look pour avoir la liste des personnages présents dans cette pièce.
+        <BLANKLINE>
         False
-        >>> talk(game, ["talk"], 1)
+        >>> Actions.talk(game, ["talk", "Timmy", "Tommy"], 1)
+        <BLANKLINE>
+        La commande 'talk' prend 1 seul paramètre.
+        <BLANKLINE>
+        False
+        >>> Actions.talk(game, ["talk"], 1)
+        <BLANKLINE>
+        La commande 'talk' prend 1 seul paramètre.
+        <BLANKLINE>
         False
 
         """
