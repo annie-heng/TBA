@@ -108,46 +108,46 @@ class Game:
         """Initialize all rooms and their exits."""
         # Create rooms
         s = "dans la partie nord du village."
-        villagenorth = Room("VillageNorth", s)
+        villagenorth = Room("VillageNorth", s, False)
 
         s = "dans la partie sud du village."
-        villagesouth = Room("VillageSouth", s)
+        villagesouth = Room("VillageSouth", s, False)
 
         s = "à l'intérieur d'un château aux murs sombres."
-        castle = Room("Castle", s)
+        castle = Room("Castle", s, False)
 
         s = "dans un sous-terrain entièrement plongé dans l'obscurité"
-        undercastle = Room("UnderCastle", s)
+        undercastle = Room("UnderCastle", s, True)
 
         s = "dans le hall d'une tour. Vous apercevez devant vous des escaliers menant au sommet, et d'autres cachés dans un recoin."
-        tower = Room("Tower", s)
+        tower = Room("Tower", s, False)
 
         s = "dans une pièce minuscule au sommet de la tour."
-        toptower = Room("TopTower", s)
+        toptower = Room("TopTower", s, False)
         
         s = "dans une cave encombrée d'objets poussiérieux."
-        towercave = Room("BottomTower", s)
+        towercave = Room("BottomTower", s, True)
 
         s = "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci."
-        cave = Room("Cave", s)
+        cave = Room("Cave", s, True)
 
         s = "dans une barque sur un lac."
-        lake = Room("Lake", s)
+        lake = Room("Lake", s, False)
 
         s = "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres."
-        forest = Room("Forest", s)
+        forest = Room("Forest", s, False)
 
         s = "dans des écuries bien entretenues, où quelques chevaux se reposent."
-        stable = Room("Stable", s)
+        stable = Room("Stable", s, False)
 
         s = "sur un pont à l'aspect fragile."
-        bridge = Room("Bridge", s)
+        bridge = Room("Bridge", s, False)
 
         s = "dans un champ de hautes herbes."
-        field = Room("Field", s)
+        field = Room("Field", s, False)
 
         s = "dans une boutique d'items tenue par une vieille dame."
-        shop = Room("Shop", s)
+        shop = Room("Shop", s, False)
 
         # Add rooms to game
         for room in [villagenorth, villagesouth, forest, tower, toptower, towercave, cave, castle, undercastle, stable, bridge, lake, field, shop]:
@@ -207,6 +207,9 @@ class Game:
         self.rooms[9].inventory["money"] = money        # stable
         self.rooms[10].inventory["beamer"] = beamer     # bridge
         self.rooms[8].inventory["magicmap"] = magicmap  #undercastle
+
+        #Setup Player's inventory
+        self.player.inventory["torch"] = torch
         
     def _setup_characters(self):
         """Initialize the Characters and their locations"""

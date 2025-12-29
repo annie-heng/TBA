@@ -75,6 +75,11 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
 
+        #A supprimer si trop contraignant
+        if player.current_room.is_dark :
+            print("\nSe déplacer dans le noir est trop dangereux, il faudrait de quoi s'éclairer...\n") 
+            return False
+
         # Get the direction from the list of words.
         direction = list_of_words[1]
         #Check if the provided direction is part of the valid words list of one possible direction
@@ -547,6 +552,11 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
 
+        # If the room is dark, print the corresponding message and return False.
+        if player.current_room.is_dark :
+            print("\nCette pièce est beaucoup trop sombre pour y voir quoi que ce soit !\n")
+            return False 
+
         # Print the description and the list of items in the current room.
         print(f"{player.current_room.get_long_description()} {player.current_room.get_inventory()}")
         return True
@@ -610,6 +620,11 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
+
+        # If the room is dark, print the corresponding message and return False.
+        if player.current_room.is_dark :
+            print("\nLa pièce est plongée dans le noir, impossible d'attraper un objet dans ces conditions.\n")
+            return False 
 
         # Get the item name from the list of words.
         item_name = list_of_words[1]
@@ -937,11 +952,17 @@ class Actions:
             print("\nLe beamer a été utilisé et a disparu.\n")
             return True
 
-        if item_name == "magicmap" :
+        elif item_name == "magicmap" :
             location_list = ""
             for charac in game.characters.values() :
                 location_list += charac.get_location()
             print(location_list)
+            return True
+
+        elif item_name == "torch" :
+            for room in game.rooms :
+                if room.is_dark :
+                    room.is_dark = False
             return True
 
         else :

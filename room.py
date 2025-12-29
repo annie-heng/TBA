@@ -10,6 +10,7 @@ class Room:
         exits (dict) : a dict object. The keys are the directions, and the value associated with a key is the corresponding room.
         inventory(dict) : a dict object that lists all the Items that are present in the room. Keys are the names of the Items, and the values are the corresponding Item objects.
         characters(dict) : a dict object that lists the characters that are present in the room. Keys are the names of the characters, and the values are the corresponding Character objects.
+        is_dark (bool) : Indicates if the room is dark; if so, the player cannot use certain commands in this Room.
 
     Methods : 
         __init__(self, name, description) : The constructor.
@@ -41,9 +42,10 @@ class Room:
     """
 
     # Define the constructor. 
-    def __init__(self, name, description):
+    def __init__(self, name, description, is_dark):
         self.name = name
         self.description = description
+        self.is_dark = is_dark
         self.exits = {}
         self.inventory = {}
         self.characters = {}
@@ -68,6 +70,8 @@ class Room:
 
     # Return a long description of this room including exits.
     def get_long_description(self):
+        if self.is_dark :
+            return f"\nVous êtes {self.description}\n\nImpossible de se repérer, il fait trop sombre.\n"
         return f"\nVous êtes {self.description}\n\n{self.get_exit_string()}\n"
 
     #Define the get_inventory method.
