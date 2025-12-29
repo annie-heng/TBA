@@ -963,6 +963,7 @@ class Actions:
             for room in game.rooms :
                 if room.is_dark :
                     room.is_dark = False
+            print("\nVous avez allumé la torche.\n")
             return True
 
         else :

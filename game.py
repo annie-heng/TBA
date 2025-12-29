@@ -49,7 +49,7 @@ class Game:
                                         , Actions.quit
                                         , 0)
         self.commands["go"] = Command("go"
-                                      , "<N|E|S|O> : se déplacer dans une direction cardinale"
+                                      , "<N|E|S|O|U|D> : se déplacer dans une direction cardinale"
                                       , Actions.go
                                       , 1)
         self.commands["quests"] = Command("quests"
@@ -80,11 +80,11 @@ class Game:
                                             , Actions.back
                                             , 0)
         self.commands["take"]     = Command("take"
-                                            , ": prendre un Item présent dans la pièce où se situe le joueur"
+                                            , " <objet> : prendre un Item présent dans la pièce où se situe le joueur"
                                             , Actions.take
                                             , 1)
         self.commands["drop"]     = Command("drop"
-                                           , " : déposer un Item de l'inventaire dans la pièce actuelle"
+                                           , " <objet> : déposer un Item de l'inventaire dans la pièce actuelle"
                                            , Actions.drop
                                            , 1)
         self.commands["check"]     = Command("check"
@@ -92,7 +92,7 @@ class Game:
                                             , Actions.check
                                             , 0)
         self.commands["talk"]     = Command("talk"
-                                           , " : parler à un personnage présent dans la pièce"
+                                           , " <personnage> : parler à un personnage présent dans la pièce"
                                            , Actions.talk
                                            , 1)
         self.commands["charge"]     = Command("charge"
@@ -100,7 +100,7 @@ class Game:
                                             , Actions.charge
                                             , 0)
         self.commands["use"]     = Command("use"
-                                           , " : utiliser un objet présent dans votre inventaire"
+                                           , " <objet> : utiliser un objet présent dans votre inventaire"
                                            , Actions.use
                                            , 1)                        
 

@@ -35,9 +35,9 @@ python game.py
 - `take <objet>` : Prendre un Item présent dans la pièce où se situe le joueur
 - `drop <objet>` : Déposer un Item de l'inventaire dans la pièce actuelle
 - `check` : Afficher la liste des Items contenus dans l'inventaire du joueur
-- `talk <nom>` : Parler à un personnage présent dans la pièce
+- `talk <personnage>` : Parler à un personnage présent dans la pièce
 - `charge` : Mémoriser la pièce actuelle si l'Item "beamer" est présent dans l'inventaire
-- `use` : Utiliser un Item présent dans l'inventaire
+- `use <objet>` : Utiliser un Item présent dans l'inventaire
 
 
 ### Commandes de quêtes
