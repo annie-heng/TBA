@@ -214,20 +214,33 @@ class Game:
         self.rooms[7].characters["King"] = king     # castle
         self.characters["King"] = king
 
-        timmy = Character("Timmy", "un enfant du village qui adore explorer et ne se trouve jamais longtemps au même endroit, au grand dam de ses parents", self.rooms[0], ["C'est parti pour l'aventure!", "J'ai envie de bonbons...", "Où est-ce que je peux aller?"])
+        timmy = Character("Timmy", "un enfant du village qui adore explorer et ne se trouve jamais longtemps au même endroit, au grand dam de ses parents", self.rooms[0], ["Moi j'ai pas peur des dragons ! Je peux aller où je veux !", "C'est parti pour l'aventure!", "J'ai envie de bonbons...", "Où est-ce que je peux aller?"])
         self.rooms[0].characters["Timmy"] = timmy   # villagenorth
         self.characters["Timmy"] = timmy
 
-        shopkeeper = Character("Shopkeeper", "le seul vendeur du royaume, demandez lui n'importe quoi ça vous sera utile", self.rooms[13], ["Bonjour, que puis-je faire pour vous ?", "Tu peux aussi récolter des items à travers le pays."])
+        shopkeeper = Character("Shopkeeper", "le seul vendeur du royaume, demandez lui n'importe quoi ça vous sera utile", self.rooms[13], ["Quoi, un dragon qui rôde autour ? Ce n'est pas bon pour les affaires, ça...", "Bonjour, que puis-je faire pour vous ?", "Tu peux aussi récolter des items à travers le pays."])
         self.rooms[13].characters["Shopkeeper"] = shopkeeper   # shop
         self.characters["Shopkeeper"] = shopkeeper
+
+        dad = Character("Dad", "le botaniste du village, toujours à la recherche de nouvelles plantes ou des matériaux rares. Il est également le père de Timmy", self.rooms[12], ["Un dragon ?! Ce n'est pas vrai, Timmy est encore dehors ! Je dois vite le retrouver!", "Où est-ce qu'il a bien pu se fourrer, cette fois...", "Ces fleurs protègent du mal, selon les légendes."])
+        self.rooms[12].characters["Dad"] = dad          # field
+        self.characters["Dad"] = dad
+
+        witch = Character("Witch", "une sorcière ayant plus de 150 ans mais qui n'en fait pas plus de 40, sa magie est d'un niveau plutôt moyen contrairement à ce qu'elle prétend", self.rooms[4], ["Face à mes sorts, un dragon ne fait pas le poids ! Mais merci tout de même de m'avoir prévenue.", "Sauriez-vous s'il existe un abri bien protégé ? C'est pour un ami, bien sûr, je m'en sortirai très bien...", "Emp ots nacydobon enoon ! C'est mon sortilège favori."])
+        self.rooms[4].characters["Witch"] = witch
+        self.characters["Witch"] = witch
+
+        troubadour = Character("Troubadour", "un musicien talentueux qui ne peut s'empêcher de chantonner et de rimer", self.rooms[0], ["🎶​ Une créature terrifiante serait dans le coin ? J'ai intérêt à fuir bien loin 🎶​", " 🎶​ Même les plus braves et les plus fous, prendraient leurs jambes à leur cou ! 🎶​"])
+        self.rooms[0].characters["Troubadour"] = troubadour
+        self.characters["Troubadour"] = troubadour
+
 
     def _setup_quests(self):
         """Initialize all quests."""
         talking_quest = Quest(
             title="Prévenir le peuple",
-            description="Aller voir chaque membre du royaume pour les prévenir du danger.",
-            objectives=["Parler avec Timmy", "Parler avec King", "Parler avec Shopkeeper" ],
+            description="Aller voir chaque membre du royaume pour les prévenir du danger : un dragon qui se serait établi dans les environs et qui est connu pour sa violence.",
+            objectives=["Parler avec Timmy", "Parler avec Shopkeeper", "Parler avec Dad", "Parler avec Witch", "Parler avec Troubadour"],
             reward="Un paquet de bonbons"
         )
 
