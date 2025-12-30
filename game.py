@@ -119,7 +119,7 @@ class Game:
         s = "dans un sous-terrain entièrement plongé dans l'obscurité"
         undercastle = Room("UnderCastle", s, True)
 
-        s = "dans le hall d'une tour. Vous apercevez devant vous des escaliers menant au sommet, et d'autres cachés dans un recoin."
+        s = "dans le hall d'une tour. Il y a des escaliers menant au sommet, et d'autres cachés dans un recoin."
         tower = Room("Tower", s, False)
 
         s = "dans une pièce minuscule au sommet de la tour."
@@ -134,7 +134,7 @@ class Game:
         s = "dans une barque sur un lac."
         lake = Room("Lake", s, False)
 
-        s = "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres."
+        s = "dans une forêt enchantée. On y entend une brise légère à travers la cime des arbres."
         forest = Room("Forest", s, False)
 
         s = "dans des écuries bien entretenues, où quelques chevaux se reposent."
@@ -146,7 +146,7 @@ class Game:
         s = "dans un champ de hautes herbes."
         field = Room("Field", s, False)
 
-        s = "dans une boutique d'items tenue par une vieille dame."
+        s = "dans une boutique d'items tenue par un vieil homme."
         shop = Room("Shop", s, False)
 
         # Add rooms to game
@@ -254,8 +254,26 @@ class Game:
             reward="Un talisman puissant permettant de résister aux flammes"
         )
 
+        walking_quest = Quest(
+            title ="Le tour du pays",
+            description ="Parcourir le pays entier, et découvrir tous les lieux qui le composent.",
+            objectives = ["Visiter VillageNorth", "Visiter VillageSouth", "Visiter Castle", "Visiter UnderCastle", 
+                        "Visiter Tower", "Visiter TopTower", "Visiter BottomTower", "Visiter Cave", "Visiter Lake", 
+                        "Visiter Forest", "Visiter Stable", "Visiter Bridge", "Visiter Field", "Visiter Shop"],
+            reward="Une paire de bottes confortables, parfaites pour de longues distances"
+        )
+
+        suit_up_quest = Quest(
+            title="L'habit fait le chevalier",
+            description="Récupérer le nécessaire pour aller vaincre le dragon",
+            objectives=["Prendre sword", "Prendre shield"],
+            reward="Une médaille d'honneur"
+        )
+
         self.player.quest_manager.add_quest(talking_quest)
         self.player.quest_manager.add_quest(ring_quest)
+        self.player.quest_manager.add_quest(walking_quest)
+        self.player.quest_manager.add_quest(suit_up_quest)
     
     """
     A EFFACER
