@@ -56,15 +56,17 @@ class Actions:
         <BLANKLINE>
         Sorties: N, E, S, O
         <BLANKLINE>
+        True
         >>> Actions.go(game, ["go", "N", "E"], 1)
         <BLANKLINE>
         La commande 'go' prend 1 seul paramètre.
         <BLANKLINE>
+        False
         >>> Actions.go(game, ["go"], 1)
         <BLANKLINE>
         La commande 'go' prend 1 seul paramètre.
         <BLANKLINE>
-
+        False
         """
         
         player = game.player
@@ -123,15 +125,17 @@ class Actions:
         <BLANKLINE>
         Merci TestPlayer d'avoir joué. Au revoir.
         <BLANKLINE>
+        True
          >>> Actions.quit(game, ["quit", "N"], 0)
         <BLANKLINE>
         La commande 'quit' ne prend pas de paramètre.
+        False
         <BLANKLINE>
          >>> Actions.quit(game, ["quit", "N", "E"], 0)
         <BLANKLINE>
         La commande 'quit' ne prend pas de paramètre.
         <BLANKLINE>
-
+        False
         """
         l = len(list_of_words)
         # If the number of parameters is incorrect, print an error message and return False.
@@ -181,11 +185,12 @@ class Actions:
         <BLANKLINE>
         La commande 'help' ne prend pas de paramètre.
         <BLANKLINE>
+        False
          >>> Actions.help(game, ["help", "N", "E"], 0)
         <BLANKLINE>
         La commande 'help' ne prend pas de paramètre.
         <BLANKLINE>
-
+        False
         """
 
         # If the number of parameters is incorrect, print an error message and return False.
@@ -436,11 +441,12 @@ class Actions:
         <BLANKLINE>
         La commande 'history' ne prend pas de paramètre.
         <BLANKLINE>
+        False
          >>> Actions.history(game, ["history", "N", "E"], 0)
         <BLANKLINE>
         La commande 'history' ne prend pas de paramètre.
         <BLANKLINE>
-
+        False
         """
     
         player = game.player
@@ -466,6 +472,7 @@ class Actions:
         <BLANKLINE>
         Impossible de retourner en arrière ! Votre historique est vide.
         <BLANKLINE>
+        False
         >>> Actions.go(game, ["go", "N"], 1)
         <BLANKLINE>
         Vous êtes dans la partie nord du village.
@@ -484,11 +491,12 @@ class Actions:
         <BLANKLINE>
         La commande 'back' ne prend pas de paramètre.
         <BLANKLINE>
+        False
          >>> Actions.back(game, ["back", "N", "E"], 0)
         <BLANKLINE>
         La commande 'back' ne prend pas de paramètre.
         <BLANKLINE>
-
+        False
         """
 
         player = game.player

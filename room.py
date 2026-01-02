@@ -11,6 +11,7 @@ class Room:
         inventory(dict) : a dict object that lists all the Items that are present in the room. Keys are the names of the Items, and the values are the corresponding Item objects.
         characters(dict) : a dict object that lists the characters that are present in the room. Keys are the names of the characters, and the values are the corresponding Character objects.
         is_dark (bool) : Indicates if the room is dark; if so, the player cannot use certain commands in this Room.
+        image (str) : Path to image file (PNG/JPG) for this room
 
     Methods : 
         __init__(self, name, description) : The constructor.
@@ -41,17 +42,42 @@ class Room:
 
     """
 
-    # Define the constructor. 
-    def __init__(self, name, description, is_dark):
+    # Define the constructor.
+    def __init__(self, name, description, is_dark, image = None):
+        """
+        Initialize a Room with a name and description.
+        
+        >>> room = Room("Hall", "dans un grand hall")
+        >>> room.name
+        'Hall'
+        >>> room.description
+        'dans un grand hall'
+        >>> room.exits
+        {}
+        >>> room.image is None
+        True
+        """
         self.name = name
         self.description = description
         self.is_dark = is_dark
+        self.image = image
         self.exits = {}
         self.inventory = {}
         self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
+        """
+        Return the room in the given direction if it exists.
+        
+        >>> room1 = Room("Room1", "dans une pièce")
+        >>> room2 = Room("Room2", "dans une autre pièce")
+        >>> room1.exits["N"] = room2
+        >>> room1.get_exit("N") == room2
+        True
+        >>> room1.get_exit("S") is None
+        True
+        """
 
         # Return the room in the given direction if it exists.
         if direction in self.exits.keys():
@@ -61,6 +87,17 @@ class Room:
     
     # Return a string describing the room's exits.
     def get_exit_string(self):
+        """
+        Return a string describing the room's exits.
+        
+        >>> room1 = Room("Room1", "dans une pièce")
+        >>> room2 = Room("Room2", "dans une autre pièce")
+        >>> room3 = Room("Room3", "dans une troisième pièce")
+        >>> room1.exits["N"] = room2
+        >>> room1.exits["E"] = room3
+        >>> room1.get_exit_string() # doctest: +ELLIPSIS
+        'Sorties: N'
+        """
         exit_string = "Sorties: " 
         for exit in self.exits.keys():
             if self.exits.get(exit) is not None:
@@ -70,6 +107,19 @@ class Room:
 
     # Return a long description of this room including exits.
     def get_long_description(self):
+        """
+        Return a long description of this room including exits.
+        
+        >>> room1 = Room("Hall", "dans un grand hall")
+        >>> room2 = Room("Kitchen", "dans une cuisine")
+        >>> room1.exits["N"] = room2
+        >>> print(room1.get_long_description()) # doctest: +ELLIPSIS
+        <BLANKLINE>
+        Vous êtes dans un grand hall
+        <BLANKLINE>
+        Sorties: N
+        <BLANKLINE>
+        """
         if self.is_dark :
             return f"\nVous êtes {self.description}\n\nImpossible de se repérer, il fait trop sombre.\n"
         return f"\nVous êtes {self.description}\n\n{self.get_exit_string()}\n"
