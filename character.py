@@ -17,7 +17,7 @@ class Character():
         __init__(self, name) : The constructor.
         move(self) : Move the character to an adjacent room with a one in two chance. If the randomly chosen room is the cave, cancel the movement.
         get_msg(self) : Return the message in first position in the msgs attribute, remove it and add it at the end of the msgs attribute.
-        
+        get_location(self) : Return the description of the current_room attribute. 
 
     Examples:
     >>> from room import Room

@@ -458,7 +458,10 @@ class Game:
         if not self.player or not self.player.name:
             return
 
-        print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
+        print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure médiéval !")
+        print("Le royaume est en danger et vous avez été élu pour en être le héros !")
+        print("Explorez, Discutez, pour découvrir tous les secrets de ce monde et ce pourquoi vous avez attéri ici.")
+        print("Bon courage !!!")
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())
