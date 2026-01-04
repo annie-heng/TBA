@@ -244,19 +244,26 @@ class Player():
             print("\nImpossible de retourner en arrière ! Votre historique est vide.\n")
             return False
 
-        #Set the current room to the last visited room.
-        self.current_room = self.history.pop()
-        print(self.current_room.get_long_description())
-        #print(self.get_history())
+        #Set a inter room 
+        inter_room = self.history[-1]
+        if inter_room in self.current_room.exits.values() :
+            #Set the current room to the last visited room.
+            self.current_room = self.history.pop()
+            print(self.current_room.get_long_description())
+            #print(self.get_history())
 
-         # Check room visit objectives
-        self.quest_manager.check_room_objectives(self.current_room.name)
+            # Check room visit objectives
+            self.quest_manager.check_room_objectives(self.current_room.name)
 
-        # Increment move counter and check movement objectives
-        self.move_count += 1
-        self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
+            # Increment move counter and check movement objectives
+            self.move_count += 1
+            self.quest_manager.check_counter_objectives("Se déplacer", self.move_count)
 
-        return True
+            return True
+
+        else : 
+            print("\nImpossile de retourner en arrière, le passage est à sens unique !\n")
+            return False
 
     #Define the get_inventory method.
     def get_inventory(self) :
