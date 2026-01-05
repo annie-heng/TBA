@@ -249,6 +249,7 @@ class Actions:
 
         # Show all quests
         game.player.quest_manager.show_quests()
+        print("Veuillez les réaliser dans l'ordre.\n")
         return True
 
 
@@ -949,7 +950,7 @@ class Actions:
         if item is None :
             print(f"\nAucun objet nommé {item_name} ne se trouve dans votre inventaire. Tapez check pour avoir le détail de votre inventaire.\n")
             return False
-        
+
         #Check if the requested item has an use.
         if item_name == "beamer" :
             # Check if the beamer is charged.
@@ -968,11 +969,27 @@ class Actions:
             return True
 
         elif item_name == "torch" :
-            for room in game.rooms :
-                if room.is_dark :
-                    room.is_dark = False
-            print("\nVous avez allumé la torche.\n")
-            return True
+            room = game.player.current_room
+            if room.is_dark :
+                room.is_dark = False
+                print("\nVous avez allumé la torche.\n")
+                return True
+            else :
+                print("\nLa pièce est déjà illuminée.\n")
+                return False
+
+        elif item_name == "sword" :
+            if player.current_room.is_dark :
+                print("\nManier une épée est trop dangereux dans le noir vous risqueriez de vous blesser, il faudrait de quoi s'éclairer...\n") 
+                return False
+            room = game.player.current_room 
+            if room.name == "Cave" :
+                print("\nVous avez sauvé le royaume. Vous pouvez quitter la partie avec la commande quit.\n")
+                player.quest_manager.check_action_objectives("Utiliser", item_name)
+                return True
+            else : 
+                print("\nVous ne pouvez pas utiliser la sword dans le royaume. Vous risquez de blesser quelqu'un attendez le bon moment.\n")
+                return False
 
         else :
             print(f"\nL'objet '{item_name}' n'est pas utilisable.\n")

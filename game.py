@@ -237,12 +237,16 @@ class Game:
         self.characters["Dad"] = dad
 
         witch = Character("Witch", "une sorcière ayant plus de 150 ans mais qui n'en fait pas plus de 40, sa magie est d'un niveau plutôt moyen contrairement à ce qu'elle prétend", self.rooms[4], ["Face à mes sorts, un dragon ne fait pas le poids ! Mais merci tout de même de m'avoir prévenue.", "Sauriez-vous s'il existe un abri bien protégé ? C'est pour un ami, bien sûr, je m'en sortirai très bien...", "Emp ots nacydobon enoon ! C'est mon sortilège favori."])
-        self.rooms[4].characters["Witch"] = witch
+        self.rooms[4].characters["Witch"] = witch       # toptower
         self.characters["Witch"] = witch
 
         troubadour = Character("Troubadour", "un musicien talentueux qui ne peut s'empêcher de chantonner et de rimer", self.rooms[0], ["🎶​ Une créature terrifiante serait dans le coin ? J'ai intérêt à fuir bien loin 🎶​", " 🎶​ Même les plus braves et les plus fous, prendraient leurs jambes à leur cou ! 🎶​"])
-        self.rooms[0].characters["Troubadour"] = troubadour
+        self.rooms[0].characters["Troubadour"] = troubadour     #villagenorth
         self.characters["Troubadour"] = troubadour
+
+        dragon = Character("Dragon", "un dragon en rage est prêt à détruire le royaume", self.rooms[6], ["GRRRRRRRRRRRRRRRRRRRR 🔥 !!!"])
+        self.rooms[6].characters["Dragon"] = dragon     #cave
+        self.characters["Dragon"] = dragon
 
 
     def _setup_quests(self):
@@ -273,7 +277,7 @@ class Game:
         suit_up_quest = Quest(
             title="L'habit fait le chevalier",
             description="Récupérer le nécessaire pour aller vaincre le dragon",
-            objectives=["Prendre sword", "Prendre shield"],
+            objectives=["Prendre sword", "Prendre shield", "Aller à Cave", "Utiliser sword"],
             reward="Une médaille d'honneur"
         )
 

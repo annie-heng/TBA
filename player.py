@@ -66,7 +66,7 @@ class Player():
         self.current_room = None
         self.history = []
         self.inventory = {}
-        self.max_weight = 4
+        self.max_weight = 8
         self.current_weight = 0
         self.money = 2
         self.beamer_room = None
