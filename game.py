@@ -121,10 +121,10 @@ class Game:
         villagesouth = Room("VillageSouth", s, False, image="villagesouth.png")
 
         s = "à l'intérieur d'un château aux murs sombres."
-        castle = Room("Castle", s, False)
+        castle = Room("Castle", s, False, image = "castle.png")
 
         s = "dans un sous-terrain entièrement plongé dans l'obscurité"
-        undercastle = Room("UnderCastle", s, True)
+        undercastle = Room("UnderCastle", s, True, image = "undercastle.png")
 
         s = "dans le hall d'une tour. Il y a des escaliers menant au sommet, et d'autres cachés dans un recoin."
         tower = Room("Tower", s, False, image = "tower.png")
@@ -133,13 +133,13 @@ class Game:
         toptower = Room("TopTower", s, False, image = "toptower.png")
         
         s = "dans une cave encombrée d'objets poussiérieux."
-        towercave = Room("BottomTower", s, True)
+        towercave = Room("BottomTower", s, True, image = "towercave.png")
 
         s = "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci."
         cave = Room("Cave", s, True, image = "cave.png")
 
         s = "dans une barque sur un lac."
-        lake = Room("Lake", s, False)
+        lake = Room("Lake", s, False, image = "lake.png")
 
         s = "dans une forêt enchantée. On y entend une brise légère à travers la cime des arbres."
         forest = Room("Forest", s, False, image = "forest.png")
@@ -148,13 +148,13 @@ class Game:
         stable = Room("Stable", s, False, image = "stable.png")
 
         s = "sur un pont à l'aspect fragile."
-        bridge = Room("Bridge", s, False, image = "no.png")
+        bridge = Room("Bridge", s, False, image = "bridge.png")
 
         s = "dans un champ de hautes herbes."
-        field = Room("Field", s, False, image = "no.png")
+        field = Room("Field", s, False, image = "field.png")
 
         s = "dans une boutique d'items tenue par un vieil homme."
-        shop = Room("Shop", s, False, image = "no.png")
+        shop = Room("Shop", s, False, image = "shop.png")
 
         # Add rooms to game
         for room in [villagenorth, villagesouth, forest, tower, toptower, towercave, cave, castle, undercastle, stable, bridge, lake, field, shop]:
