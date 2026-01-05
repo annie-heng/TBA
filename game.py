@@ -115,46 +115,46 @@ class Game:
         """Initialize all rooms and their exits."""
         # Create rooms
         s = "dans la partie nord du village."
-        villagenorth = Room("VillageNorth", s, False, image = "villagenorth.jpg")
+        villagenorth = Room("VillageNorth", s, False, image = "villagenorth.png")
 
         s = "dans la partie sud du village."
-        villagesouth = Room("VillageSouth", s, False, image="villagesouth.jpg")
+        villagesouth = Room("VillageSouth", s, False, image="villagesouth.png")
 
         s = "à l'intérieur d'un château aux murs sombres."
-        castle = Room("Castle", s, False, image = "villagenorth.jpg")
+        castle = Room("Castle", s, False)
 
         s = "dans un sous-terrain entièrement plongé dans l'obscurité"
-        undercastle = Room("UnderCastle", s, True, image = "villagenorth.jpg")
+        undercastle = Room("UnderCastle", s, True)
 
         s = "dans le hall d'une tour. Il y a des escaliers menant au sommet, et d'autres cachés dans un recoin."
-        tower = Room("Tower", s, False, image = "villagenorth.jpg")
+        tower = Room("Tower", s, False, image = "tower.png")
 
         s = "dans une pièce minuscule au sommet de la tour."
-        toptower = Room("TopTower", s, False, image = "villagenorth.jpg")
+        toptower = Room("TopTower", s, False, image = "toptower.png")
         
         s = "dans une cave encombrée d'objets poussiérieux."
-        towercave = Room("BottomTower", s, True, image = "villagenorth.jpg")
+        towercave = Room("BottomTower", s, True)
 
         s = "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci."
-        cave = Room("Cave", s, True, image = "villagenorth.jpg")
+        cave = Room("Cave", s, True, image = "cave.png")
 
         s = "dans une barque sur un lac."
-        lake = Room("Lake", s, False, image = "villagenorth.jpg")
+        lake = Room("Lake", s, False)
 
         s = "dans une forêt enchantée. On y entend une brise légère à travers la cime des arbres."
-        forest = Room("Forest", s, False, image = "villagenorth.jpg")
+        forest = Room("Forest", s, False, image = "forest.png")
 
         s = "dans des écuries bien entretenues, où quelques chevaux se reposent."
-        stable = Room("Stable", s, False, image = "villagenorth.jpg")
+        stable = Room("Stable", s, False, image = "stable.png")
 
         s = "sur un pont à l'aspect fragile."
-        bridge = Room("Bridge", s, False, image = "villagenorth.jpg")
+        bridge = Room("Bridge", s, False, image = "no.png")
 
         s = "dans un champ de hautes herbes."
-        field = Room("Field", s, False, image = "villagenorth.jpg")
+        field = Room("Field", s, False, image = "no.png")
 
         s = "dans une boutique d'items tenue par un vieil homme."
-        shop = Room("Shop", s, False, image = "villagenorth.jpg")
+        shop = Room("Shop", s, False, image = "no.png")
 
         # Add rooms to game
         for room in [villagenorth, villagesouth, forest, tower, toptower, towercave, cave, castle, undercastle, stable, bridge, lake, field, shop]:
@@ -281,144 +281,6 @@ class Game:
         self.player.quest_manager.add_quest(ring_quest)
         self.player.quest_manager.add_quest(walking_quest)
         self.player.quest_manager.add_quest(suit_up_quest)
-    
-    """
-    A EFFACER
-    # Setup the game
-    def to_delete_setup(self):
-
-        # Setup commands
-
-        help = Command("help", " : afficher cette aide", Actions.help, 0)
-        self.commands["help"] = help
-        quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
-        self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
-        self.commands["go"] = go
-        history = Command("history", " : afficher le parcours du joueur", Actions.history, 0)
-        self.commands["history"] = history
-        back = Command("back", " : revenir en arrière", Actions.back, 0)
-        self.commands["back"] = back
-        look = Command("look", " : afficher la liste des items présents dans cette pièce", Actions.look, 0)
-        self.commands["look"] = look
-        take = Command("take", " : prendre un Item présent dans la pièce où se situe le joueur", Actions.take, 1)
-        self.commands["take"] = take
-        drop = Command("drop", " : déposer un Item de l'inventaire dans la pièce actuelle", Actions.drop, 1)
-        self.commands["drop"] = drop
-        check = Command("check", " : afficher la liste des items présents dans l'inventaire du joueur", Actions.check, 0)
-        self.commands["check"] = check
-        charge = Command("charge", " : si le beamer est dans l'inventaire, la pièce actuelle est mémorisée", Actions.charge, 0)
-        self.commands["charge"] = charge
-        use = Command("use", " : utiliser un objet présent dans votre inventaire", Actions.use, 1)
-        self.commands["use"] = use
-        talk = Command("talk", " : parler à un personnage présent dans la pièce", Actions.talk, 1)
-        self.commands["talk"] = talk
-
-        # Setup rooms
-        villagenorth = Room("VillageNorth", "dans la partie nord du village.")
-        self.rooms.append(villagenorth)
-        villagesouth = Room("VillageSouth", "dans la partie sud du village.")
-        self.rooms.append(villagesouth)
-        castle = Room("Castle", "à l'intérieur d'un château aux murs sombres.")
-        self.rooms.append(castle)
-        undercastle = Room("UnderCastle", "dans un sous-terrain faiblement éclairé par des torches.")
-        self.rooms.append(undercastle)
-        tower = Room("Tower", "dans le hall d'une tour. Vous apercevez devant vous des escaliers menant au sommet, et d'autres cachés dans un recoin.")
-        self.rooms.append(tower)
-        toptower = Room("TopTower", "dans une pièce minuscule au sommet de la tour.")
-        self.rooms.append(toptower)
-        towercave = Room("BottomTower", "dans une cave encombrée d'objets poussiérieux.")
-        self.rooms.append(towercave)
-        cave = Room("Cave", "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci.")
-        self.rooms.append(cave)
-        lake = Room("Lake", "dans une barque sur un lac.")
-        self.rooms.append(lake)
-        forest = Room("Forest", "dans une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
-        self.rooms.append(forest)
-        stable = Room("Stable", "dans des écuries bien entretenues, où quelques chevaux se reposent.")
-        self.rooms.append(stable)
-        bridge = Room("Bridge", "sur un pont à l'aspect fragile.")
-        self.rooms.append(bridge)
-        field = Room("Field", "dans un champ de hautes herbes.")
-        self.rooms.append(field)
-        shop = Room("Shop", "dans une boutique d'items tenue par une vieille dame.")
-        self.rooms.append(shop)
-
-        #tower = Room("Tower", "une immense tour en pierre qui s'élève au dessus des nuages.")
-        #self.rooms.append(tower)
-        #cave = Room("Cave", "une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
-        #self.rooms.append(cave)
-        #cottage = Room("Cottage", "un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
-        #self.rooms.append(cottage)
-        #swamp = Room("Swamp", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
-        #self.rooms.append(swamp)
-        #castle = Room("Castle", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
-        #self.rooms.append(castle)
-
-        # Create exits for rooms
-
-        #forest.exits = {"N" : cave, "E" : None, "S" : castle, "O" : None}
-        #tower.exits = {"N" : cottage, "E" : None, "S" : None, "O" : None}
-        #cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        #cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        #swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        #castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
-
-        villagesouth.exits = {"N" : villagenorth, "E" : field, "S" : lake, "O" : stable, "U" : None, "D" : None}
-        villagenorth.exits = {"N" : forest, "E" : tower, "S" : villagesouth, "O" : shop, "U" : None, "D" : None}
-        castle.exits = {"N" : stable, "E" : lake, "S" : None, "O" : stable, "U" : None, "D" : undercastle}
-        undercastle.exits = {"N" : towercave, "E" : None, "S" : None, "O" : None, "U" : castle, "D" : None}
-        tower.exits = {"N" : None, "E" : None, "S" : field, "O" : villagenorth, "U" : toptower, "D" : towercave}
-        toptower.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : tower}
-        towercave.exits = {"N" : None, "E" : None, "S" : undercastle, "O" : None, "U" : tower, "D" : None}
-        cave.exits = {"N" : None, "E" : forest, "S" : None, "O" : None, "U" : None, "D" : None}
-        lake.exits = {"N" : villagesouth, "E" : bridge, "S" : None, "O" : castle, "U" : None, "D" : None}
-        forest.exits = {"N" : None, "E" : None, "S" : villagenorth, "O" : cave, "U" : None, "D" : None}
-        stable.exits = {"N" : shop, "E" : villagesouth, "S" : castle, "O" : None, "U" : None, "D" : None}
-        bridge.exits = {"N" : field, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
-        field.exits = {"N" : tower, "E" : None, "S" : None, "O" : villagesouth, "U" : None, "D" : None}
-        shop.exits = {"N" : None, "E" : villagenorth, "S" : stable, "O" : None, "U" : None, "D" : None}
-
-        # Create set of directions
-        self.exits = {d for d in tower.exits.keys()}
-
-        # Create dict object with compatible words for directions
-        self.directions = {'N' : ['N', 'North', 'NORTH', 'north', 'n'], 'S' : ['S', 'South', 'SOUTH', 'south', 's'], 'E' : ['E', 'East', 'EAST', 'east', 'e'], 'O' : ['O', 'Ouest', 'OUEST', 'ouest', 'o'], 'U' : ['U', 'Up', 'UP', 'up', 'u'], 'D' : ['D', 'Down', 'DOWN', 'down', 'd']} 
-
-        # Setup player and starting room
-
-        self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = villagesouth
-
-        #Setup item
-        sword = Item("sword", "une épée au fil tranchant comme un rasoir", 2)
-        money = Item("money", "une pièce d'argent", 0)
-        potion = Item("potion", "une potion de soin", 2)
-        shield = Item("shield", "un bouclier pour se défendre", 3)
-        torch = Item("torch", "une torche qui permet d'éclairer les lieux sombres", 3)
-        ring = Item("ring", "une bague de valeur qui semble appartenir à quelqu'un d'important", 3)
-        key = Item("key", "uné clé qui ouvre des portes", 3)
-        beamer = Item("beamer", "un objet permettant de \"mémoriser\" une pièce et de s'y téléporter", 1)
-        
-        #Setup item location
-        shop.inventory["potion"] = potion
-        castle.inventory["sword"] = sword
-        castle.inventory["shield"] = shield
-        castle.inventory["money"] = money
-        villagesouth.inventory["money"] = money
-        stable.inventory["money"] = money
-        bridge.inventory["beamer"] = beamer
-
-        #Setup player inventory
-
-        #Setup characters
-        king = Character("King", "le roi du pays, un guerrier exceptionnel qui a conquis de nombreux territoires", castle, ["Jeune aventurier, j'ai une mission pour toi. \nRetrouve ma bague, et je te ferai don d'un objet qui te sera indispensable pour ta quête."]) 
-        castle.characters["King"] = king
-        self.characters["King"] = king 
-        timmy = Character("Timmy", "un enfant du village qui adore explorer et ne se trouve jamais longtemps au même endroit, au grand dam de ses parents", villagenorth, ["C'est parti pour l'aventure!", "J'ai envie de bonbons...", "Où est-ce que je peux aller?"])
-        villagenorth.characters["Timmy"] = timmy
-        self.characters["Timmy"] = timmy
-    """
 
     # Play the game
     def play(self):
