@@ -88,7 +88,6 @@ class Actions:
         for d in game.directions.keys() :
             if direction in game.directions.get(d) :
                 player.move(d)
-
                 # Characters move only if the player uses the command "go". 
                 for character in game.characters :
                     if character in ["King", "Shopkeeper", "Dragon"]:
@@ -96,6 +95,9 @@ class Actions:
                     npc = game.characters.get(character)
                     if npc :
                         npc.move()
+                # Condition de défaite
+                if player.current_room.name == "Cave" and ("sword" or "shield") not in player.inventory :
+                    print("\nVous vous êtes aventuré dans un lieu trop dangereux pour survivre sans équipement. Vous pouvez quitter la partie avec la commande quit.\n")
                 return True
                 
         else:
@@ -988,8 +990,8 @@ class Actions:
                 return False
             room = game.player.current_room 
             if room.name == "Cave" :
-                print("\nVous avez sauvé le royaume. Vous pouvez quitter la partie avec la commande quit.\n")
                 player.quest_manager.check_action_objectives("Utiliser", item_name)
+                print("\nVous avez sauvé le royaume. Vous pouvez quitter la partie avec la commande quit.\n")
                 return True
             else : 
                 print("\nVous ne pouvez pas utiliser la sword dans le royaume. Vous risquez de blesser quelqu'un attendez le bon moment.\n")
