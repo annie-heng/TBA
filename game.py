@@ -198,7 +198,7 @@ class Game:
         money = Item("money", "une pièce d'argent", 0)
         potion = Item("potion", "une potion de soin", 2)
         shield = Item("shield", "un bouclier pour se défendre", 3)
-        torch = Item("torch", "une torche qui permet d'éclairer les lieux sombres", 3)
+        torch = Item("torch", "une torche qui permet d'éclairer les lieux sombres", 0)
         ring = Item("ring", "une bague de valeur qui semble appartenir à quelqu'un d'important", 3)
         key = Item("key", "uné clé qui ouvre des portes", 3)
         beamer = Item("beamer", "un objet permettant de \"mémoriser\" une pièce et de s'y téléporter", 1)
