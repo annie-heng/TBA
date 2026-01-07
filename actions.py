@@ -91,7 +91,7 @@ class Actions:
 
                 # Characters move only if the player uses the command "go". 
                 for character in game.characters :
-                    if character in ["King", "Shopkeeper"]:
+                    if character in ["King", "Shopkeeper", "Dragon"]:
                         continue
                     npc = game.characters.get(character)
                     if npc :
@@ -962,11 +962,15 @@ class Actions:
             return True
 
         elif item_name == "magicmap" :
-            location_list = ""
-            for charac in game.characters.values() :
-                location_list += charac.get_location()
-            print(location_list)
-            return True
+            if player.current_room.is_dark :
+                print("\nVous ne pouvez pas lire votre magicmap dans le noir, il faudrait de quoi s'éclairer...\n") 
+                return False
+            else :
+                location_list = ""
+                for charac in game.characters.values() :
+                    location_list += charac.get_location()
+                print(location_list)
+                return True
 
         elif item_name == "torch" :
             room = game.player.current_room

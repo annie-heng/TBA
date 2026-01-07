@@ -163,7 +163,7 @@ class Game:
         # Create exits
         villagesouth.exits = {"N" : villagenorth, "E" : field, "S" : lake, "O" : stable, "U" : None, "D" : None}
         villagenorth.exits = {"N" : forest, "E" : tower, "S" : villagesouth, "O" : shop, "U" : None, "D" : None}
-        castle.exits = {"N" : stable, "E" : lake, "S" : None, "O" : stable, "U" : None, "D" : undercastle}
+        castle.exits = {"N" : stable, "E" : lake, "S" : None, "O" : None, "U" : None, "D" : undercastle}
         undercastle.exits = {"N" : towercave, "E" : None, "S" : None, "O" : None, "U" : castle, "D" : None}
         tower.exits = {"N" : None, "E" : None, "S" : field, "O" : villagenorth, "U" : toptower, "D" : towercave}
         toptower.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : tower}
@@ -268,8 +268,8 @@ class Game:
         walking_quest = Quest(
             title ="Le tour du pays",
             description ="Parcourir le pays entier, et découvrir tous les lieux qui le composent.",
-            objectives = ["Visiter VillageNorth", "Visiter VillageSouth", "Visiter Castle", "Visiter UnderCastle", 
-                        "Visiter Tower", "Visiter TopTower", "Visiter BottomTower", "Visiter Cave", "Visiter Lake", 
+            objectives = ["Visiter VillageNorth", "Visiter Castle", "Visiter UnderCastle", 
+                        "Visiter Tower", "Visiter TopTower", "Visiter BottomTower", "Visiter Lake", 
                         "Visiter Forest", "Visiter Stable", "Visiter Bridge", "Visiter Field", "Visiter Shop"],
             reward="Une paire de bottes confortables, parfaites pour de longues distances"
         )
