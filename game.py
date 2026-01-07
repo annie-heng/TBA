@@ -135,7 +135,7 @@ class Game:
         s = "dans une cave encombrée d'objets poussiérieux."
         towercave = Room("BottomTower", s, True, image = "towercave.png")
 
-        s = "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci."
+        s = "dans une grotte immense au sol inégal et dans laquelle vous entendez des bruits provenant du fond de celle-ci. Préparez vous à vous battre !!!"
         cave = Room("Cave", s, True, image = "cave.png")
 
         s = "dans une barque sur un lac."

@@ -991,7 +991,11 @@ class Actions:
             room = game.player.current_room 
             if room.name == "Cave" :
                 player.quest_manager.check_action_objectives("Utiliser", item_name)
-                print("\nVous avez sauvé le royaume. Vous pouvez quitter la partie avec la commande quit.\n")
+                print("\n🙌🎊 Vous avez sauvé le royaume en éliminant la menace, le dragon est hors d'état de nuire.\n")
+                print(f"Votre mission s'arrête ici, merci {player.name} pour votre aide. Au revoir.\n")
+                print("\nVous pouvez quitter la partie avec la commande quit.\n")
+                # Set the finished attribute of the game object to True.
+                game.finished = True
                 return True
             else : 
                 print("\nVous ne pouvez pas utiliser la sword dans le royaume. Vous risquez de blesser quelqu'un attendez le bon moment.\n")
