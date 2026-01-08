@@ -96,7 +96,7 @@ class Actions:
                     if npc :
                         npc.move()
                 # Condition de défaite
-                if player.current_room.name == "Cave" and ("sword" or "shield") not in player.inventory :
+                if player.current_room.name == "Cave" and ("sword" not in player.inventory or "shield" not in player.inventory) :#("sword" or "shield") not in player.inventory :
                     print("\n💀 Vous vous êtes aventuré dans un lieu trop dangereux pour survivre sans équipement.\n")
                     print(f"Votre mission s'arrête ici, vos blessures vous ont emporté. Merci {player.name} pour votre dévouement.\n")
                     # Set the finished attribute of the game object to True.
