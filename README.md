@@ -124,6 +124,7 @@ Défaite : Si vous vous aventurer dans la grotte sans équipement vous êtes dir
 # Guide développeur : diagramme des classes
 ![alt text](diagramme_des_classes.png)
 
+
 # Perspective de développement
 
 Certains items implémentés dans le jeu ne sont pas utiles (pièces, potion, clés). 
