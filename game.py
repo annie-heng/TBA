@@ -3,6 +3,7 @@
 # Import modules
 from pathlib import Path
 import sys
+import time
 
 # Tkinter imports for GUI
 import tkinter as tk
@@ -296,6 +297,8 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
+            self.win()
+            self.loose()
 
     # Process the command entered by the player
     def process_command(self, command_string) -> None:
@@ -331,6 +334,32 @@ class Game:
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())
+
+
+    def win(self):
+        quests = self.player.quest_manager.quests
+        for quest in quests :
+            if not quest.is_completed :
+                return False
+        print("\n🙌 🎊 Vous avez sauvé le royaume en éliminant la menace, le dragon est hors d'état de nuire.\n")
+        print(f"Votre mission s'arrête ici, merci {self.player.name} pour votre aide. Au revoir.\n")
+        time.sleep(10)
+        self.finished = True
+        return True
+
+
+
+    def loose(self):
+        # Condition de défaite
+        if self.player.current_room.name == "Cave" and ("sword" not in self.player.inventory or "shield" not in self.player.inventory) :
+            print("\n💀 Vous vous êtes aventuré dans un lieu trop dangereux pour survivre sans équipement.\n")
+            print(f"Votre mission s'arrête ici, vos blessures vous ont emporté. Merci {self.player.name} pour votre dévouement.\n")
+            time.sleep(10)
+            self.finished = True
+            return True 
+        return False
+
+
     
 ##############################
 # Tkinter GUI Implementation #

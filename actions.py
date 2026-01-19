@@ -95,12 +95,6 @@ class Actions:
                     npc = game.characters.get(character)
                     if npc :
                         npc.move()
-                # Condition de défaite
-                if player.current_room.name == "Cave" and ("sword" not in player.inventory or "shield" not in player.inventory) :
-                    print("\n💀 Vous vous êtes aventuré dans un lieu trop dangereux pour survivre sans équipement.\n")
-                    print(f"Votre mission s'arrête ici, vos blessures vous ont emporté. Merci {player.name} pour votre dévouement.\n")
-                    # Set the finished attribute of the game object to True.
-                    game.finished = True
                 return True
                 
         else:
@@ -994,10 +988,7 @@ class Actions:
             room = game.player.current_room 
             if room.name == "Cave" :
                 player.quest_manager.check_action_objectives("Utiliser", item_name)
-                print("\n🙌 🎊 Vous avez sauvé le royaume en éliminant la menace, le dragon est hors d'état de nuire.\n")
-                print(f"Votre mission s'arrête ici, merci {player.name} pour votre aide. Au revoir.\n")
-                # Set the finished attribute of the game object to True.
-                game.finished = True
+                print("\nVous avez abattu le dragon !!!\n")
                 return True
             else : 
                 print("\nVous ne pouvez pas utiliser la sword dans le royaume. Vous risquez de blesser quelqu'un attendez le bon moment.\n")
