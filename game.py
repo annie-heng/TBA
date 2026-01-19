@@ -3,7 +3,6 @@
 # Import modules
 from pathlib import Path
 import sys
-import time
 
 # Tkinter imports for GUI
 import tkinter as tk
@@ -297,8 +296,6 @@ class Game:
         while not self.finished:
             # Get the command from the player
             self.process_command(input("> "))
-            self.win()
-            self.loose()
 
     # Process the command entered by the player
     def process_command(self, command_string) -> None:
@@ -319,6 +316,8 @@ class Game:
         else:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
+            self.win()
+            self.loose()
 
     # Print the welcome message
     def print_welcome(self):
@@ -343,7 +342,6 @@ class Game:
                 return False
         print("\n🙌 🎊 Vous avez sauvé le royaume en éliminant la menace, le dragon est hors d'état de nuire.\n")
         print(f"Votre mission s'arrête ici, merci {self.player.name} pour votre aide. Au revoir.\n")
-        time.sleep(10)
         self.finished = True
         return True
 
@@ -354,7 +352,6 @@ class Game:
         if self.player.current_room.name == "Cave" and ("sword" not in self.player.inventory or "shield" not in self.player.inventory) :
             print("\n💀 Vous vous êtes aventuré dans un lieu trop dangereux pour survivre sans équipement.\n")
             print(f"Votre mission s'arrête ici, vos blessures vous ont emporté. Merci {self.player.name} pour votre dévouement.\n")
-            time.sleep(10)
             self.finished = True
             return True 
         return False
