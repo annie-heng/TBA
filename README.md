@@ -122,7 +122,7 @@ Victoire : Vous devez réaliser les quêtes dans l'ordre puis finir par aller da
 Défaite : Si vous vous aventurer dans la grotte sans équipement vous êtes directement éliminé.
 
 # Guide développeur : diagramme des classes
-![alt text](diagramme_des_classes.png)
+![alt text](diagramme_classes.png)
 
 
 # Perspective de développement
