@@ -1,10 +1,10 @@
 # TBA - Jeu d'Aventure Textuel avec Système de Quêtes
 
-Cette branche contient une version du jeu d'aventure TBA (Text-Based Adventure) avec un système de quêtes intégré.
+Cette branche contient une version du jeu d'aventure TBA (Text-Based Adventure) avec un système de quêtes intégré et une interface graphique.
 
 ## Description
 
-TBA est un jeu d'aventure textuel où le joueur explore différents lieux et accomplit des quêtes via des commandes textuelles.
+TBA est un jeu d'aventure textuel avec interface graphique (Tkinter) où le joueur explore différents lieux, accomplit des quêtes et interagit avec l'environnement via des commandes textuelles.
 
 **État actuel du projet (branche `tba-quests`) :**
 - 14 lieux explorables
@@ -13,6 +13,9 @@ TBA est un jeu d'aventure textuel où le joueur explore différents lieux et acc
 - Gestion des quêtes actives et complétées
 - Suivi automatique de la progression des objectifs
 - Statistiques de déplacement du joueur 
+- Interface graphique avec Tkinter
+- Système de commandes extensible
+- Images et icônes pour améliorer l'expérience visuelle
 
 Cette version introduit un système de quêtes qui enrichit considérablement l'expérience de jeu et sert de base pour des mécaniques plus complexes.
 
@@ -21,6 +24,13 @@ Cette version introduit un système de quêtes qui enrichit considérablement l'
 Pour démarrer le jeu, exécuter simplement :
 ```bash
 python game.py
+```
+
+Le jeu s'ouvrira dans une fenêtre graphique avec une interface utilisateur.
+
+On peut toujours exécuter le jeu dans un terminal:
+```bash
+python game.py --cli
 ```
 
 ## Commandes disponibles
@@ -64,6 +74,7 @@ Le projet est organisé en 8 modules contenant chacun une ou plusieurs classes :
 ### Modules principaux
 
 - **`game.py` / `Game`** : Gestion de l'état du jeu, de l'environnement et de l'interface avec le joueur
+- **`game.py` / `GameGUI`** : Classe qui gère l'interface graphique Tkinter
 - **`room.py` / `Room`** : Propriétés génériques d'un lieu (nom, description, sorties, Items & personnages présents)
 - **`item.py` / `Item`** : Propriétés génériques d'un objet (nom, description, poids)
 - **`player.py` / `Player`** : Représentation du joueur avec gestion des déplacements et intégration du QuestManager
@@ -77,6 +88,12 @@ Le projet est organisé en 8 modules contenant chacun une ou plusieurs classes :
   - `CounterObjective` : Objectif basé sur un compteur
   - `QuestManager` : Gestionnaire des quêtes du joueur
 
+### Dossier assets
+
+Le dossier `assets/` contient les ressources graphiques :
+- Icônes de navigation (flèches directionnelles)
+- Icônes d'aide et de sortie
+
 ## Architecture
 
 Le jeu utilise une architecture orientée objet avec gestion d'événements :
@@ -85,3 +102,26 @@ Le jeu utilise une architecture orientée objet avec gestion d'événements :
 2. **Player** contient un `QuestManager` qui suit les quêtes actives
 3. **QuestManager** vérifie automatiquement la progression lors des actions du joueur
 4. **Objectives** définissent différents types de conditions à remplir
+5. **Room** représente chaque lieu avec ses connexions
+6. **Command** encapsule les commandes utilisateur
+7. **Actions** implémente les interactions avec le joueur
+
+
+## Description
+
+Le jeu se joue dans un univers médiéval avec un village central divisé en deux parties entouré de lieux dans le même thème tels qu'un château, une forêt, des ruines, une grotte, etc. Vous plongez directement dans une avanture dans laquelle le royaume à besoin de vous pour être sauvé d'une menace. Explorez, discuter, accomplissez des quêtes pour atteindre l'objectif final. Différents items et personnages sont disponibles pour intéragir avec le monde et vous guider tout au long de votre aventure. 
+
+## Conditions de Victoire/Défaite 
+
+Victoire : Vous devez réaliser les quêtes dans l'ordre puis finir par aller dans la grotte avec l'ensemble de l'équipement nécessaire (sword & shield) pour abattre le dragon.
+
+Défaite : Si vous vous aventurer dans la grotte sans équipement vous êtes directement éliminé.
+
+## Perspective de développement
+
+Certains items implémentés dans le jeu ne sont pas utiles (pièces, potion, clés). 
+Nous pourrions rajouter : 
+- une action d'achat dans la boutique avec les pièces
+- un système de point de vie et de guérison 
+- le dévérouillage de portes grâce aux clés
+- un système de réapparition lorsque que l'on est éliminé au lieu de mettre fin à la partie
