@@ -2,6 +2,8 @@
 
 Cette branche contient une version du jeu d'aventure TBA (Text-Based Adventure) avec un système de quêtes intégré et une interface graphique.
 
+# Guide utilisateur
+
 ## Description
 
 TBA est un jeu d'aventure textuel avec interface graphique (Tkinter) où le joueur explore différents lieux, accomplit des quêtes et interagit avec l'environnement via des commandes textuelles.
@@ -93,6 +95,8 @@ Le projet est organisé en 8 modules contenant chacun une ou plusieurs classes :
 Le dossier `assets/` contient les ressources graphiques :
 - Icônes de navigation (flèches directionnelles)
 - Icônes d'aide et de sortie
+- Images des différents lieux du jeu
+- Diagramme des classes sous forme de fichier png
 
 ## Architecture
 
@@ -117,7 +121,10 @@ Victoire : Vous devez réaliser les quêtes dans l'ordre puis finir par aller da
 
 Défaite : Si vous vous aventurer dans la grotte sans équipement vous êtes directement éliminé.
 
-## Perspective de développement
+# Guide développeur : diagramme des classes
+![alt text](diagramme_des_classes.png)
+
+# Perspective de développement
 
 Certains items implémentés dans le jeu ne sont pas utiles (pièces, potion, clés). 
 Nous pourrions rajouter : 
