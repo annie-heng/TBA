@@ -85,9 +85,6 @@ Le projet est organisé en 8 modules contenant chacun une ou plusieurs classes :
 - **`actions.py` / `Actions`** : Méthodes statiques définissant toutes les actions exécutables (déplacements, gestion des quêtes, etc.)
 - **`quest.py`** : 
   - `Quest` : Représentation d'une quête avec ses objectifs
-  - `Objective` : Classe de base pour les objectifs
-  - `RoomObjective` : Objectif de visite d'un lieu
-  - `CounterObjective` : Objectif basé sur un compteur
   - `QuestManager` : Gestionnaire des quêtes du joueur
 
 ### Dossier assets
@@ -105,10 +102,9 @@ Le jeu utilise une architecture orientée objet avec gestion d'événements :
 1. **Game** initialise le jeu et les quêtes disponibles
 2. **Player** contient un `QuestManager` qui suit les quêtes actives
 3. **QuestManager** vérifie automatiquement la progression lors des actions du joueur
-4. **Objectives** définissent différents types de conditions à remplir
-5. **Room** représente chaque lieu avec ses connexions
-6. **Command** encapsule les commandes utilisateur
-7. **Actions** implémente les interactions avec le joueur
+4. **Room** représente chaque lieu avec ses connexions
+5. **Command** encapsule les commandes utilisateur
+6. **Actions** implémente les interactions avec le joueur
 
 
 ## Description
@@ -119,7 +115,7 @@ Le jeu se joue dans un univers médiéval avec un village central divisé en deu
 
 Victoire : Vous devez réaliser les quêtes dans l'ordre puis finir par aller dans la grotte avec l'ensemble de l'équipement nécessaire (sword & shield) pour abattre le dragon.
 
-Défaite : Si vous vous aventurer dans la grotte sans équipement vous êtes directement éliminé.
+Défaite : Si vous vous aventurez dans la grotte sans équipement vous êtes directement éliminé.
 
 # Guide développeur : diagramme des classes
 ![alt text](assets/diagramme_classes.png)
